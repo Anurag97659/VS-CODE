@@ -16,7 +16,6 @@ class Emp{
        cout<<id<<endl;
        cout<<location<<endl;
        cout<<"git testing";
-       cout<<"git testing";
    }
    
 };
