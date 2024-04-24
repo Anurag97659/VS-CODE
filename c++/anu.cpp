@@ -15,6 +15,8 @@ class Emp{
        cout<<name<<endl;
        cout<<id<<endl;
        cout<<location<<endl;
+       cout<<"Regular checking"<<endl;
+       cout<<"Regular checking"<<endl;
    }
 };
 int main(){
