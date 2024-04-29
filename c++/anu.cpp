@@ -59,4 +59,5 @@ int main() {
   std::cout << emp3.sal_process() << std::endl;
   PayRoll_Process p;
   std::cout << p.sal_process(emp1, emp2, emp3);
+  std::cout << p.sal_process(emp1, emp2, emp3);
 }
