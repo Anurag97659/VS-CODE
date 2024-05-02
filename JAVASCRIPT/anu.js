@@ -1,12 +1,7 @@
-const prompt = require('prompt-sync')();
-let b= prompt('num = ')
-let a=[]
-for(let i=0;i<=b;i++){
-  a[i]=i;
- 
+// fibonnaci number using for loop
+
+function fib(n) {
+  if (n <= 1) return n;
+  return fib(n - 1) + fib(n - 2);
 }
-function fibonacci(c,d) {
-  return c+d;
-}
-let f=a.reduce(fibonacci)
-console.log(f)
+console.log(fib(10))
