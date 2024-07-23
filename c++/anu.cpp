@@ -1,4 +1,4 @@
-// ====================================finding hcf and gcd===========================
+// ====================================finding hcf and gcd==========================
 // #include <bits/stdc++.h>
 // #include<vector>
 // using namespace std;
@@ -81,7 +81,7 @@
 //  high_limit--;
 //  } }
 
-// ====================================selection sorting===========================
+// ====================================selection sorting============================
 // #include<iostream>
 // using namespace std;
 // int main(){
@@ -105,7 +105,7 @@
 //     }
 // }
 
-// ====================================bubble sorting=============================
+// ====================================bubble sorting==============================
 // #include <iostream>
 // using namespace std;
 // int main(){
@@ -160,5 +160,112 @@
 //     cout<<"sorted array = ";
 //     for(int i=0;i<n;i++){
 //         cout<<arr[i]<<" ";
+
+//Find the Largest and second largest element in an array
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int a;
+//     cin>>a;
+//     int arr[a]={};
+//     for(int i=0;i<a;i++){
+//         cin>>arr[i];
+//     }
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     cout<<"\nmax in array arr is = ";
+//     int b=1;
+//     for(int i=0;i<a;i++){
+//         if(arr[i]>b){b=arr[i];}
+//     }
+//     cout<<b<<endl;
+//     for(int i=0;i<a;i++){
+//         if(arr[i]==b){
+//             arr[i]=0;}
+//     }
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     int c=0;
+//     for(int i=0;i<a;i++){
+//         if(arr[i]>c){c=arr[i];}
+//     }
+//     cout<<"\nSecond max in array arr is = "<<c;
+// }
+
+// check array sorted or not
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int a;
+//     cin>>a;
+//     int arr[a]={};
+//     for(int i=0;i<a;i++){
+//         cin>>arr[i];
+//     }
+//     cout<<"array = ";
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     cout<<endl;
+//     int b=0;
+//     for(int i=0;i<a-1;i++){
+//         if(arr[i]>arr[i+1]){
+//             b++;
+//         }  
+//     }
+//     if(b==0){cout<<"sorted\n";}
+//     else cout<<"not  sroted\n";
+// }
+
+//remove dublicate from array by hasing;
+// method 1==>
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int a;
+//     cin>>a;
+//     int arr[a]={};
+//     for(int i=0;i<a;i++){
+//         cin>>arr[i];
+//     }
+//     cout<<"array = ";
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     cout<<endl;
+//     for(int i=0;i<a;i++){
+//         for(int j=i+1;j<=a-1;j++){
+//             if(arr[i]==arr[j]){
+//                 arr[j]=0;   
+//             }
+//         }
+//     }
+//     for(int i=0;i<a;i++){
+//         for(int j=i+1;j<=a-1;j++){
+//             if(arr[i]>arr[j]){
+//                 int  temp =arr[j];
+//                 arr[j]=arr[i];
+//                 arr[i]=temp;
+//             }
+//         }
+//     }
+//     int count=0;                            
+//     for(int i=0;i<a;i++){
+//         if(arr[i]==0){
+//             for(int j=i;j<a-i;j++){
+//                 arr[j]=arr[j+1];
+//             }
+//                 a--;
+//                 i--;
+//         }
+//     }
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
 //     }
 // }
+// hasing method
+
+
+
