@@ -219,7 +219,7 @@
 //     else cout<<"not  sroted\n";
 // }
 
-//remove dublicate from array by hasing;
+//remove dublicate from array ;
 // method 1==>
 // #include <iostream>
 // using namespace std;
@@ -265,7 +265,92 @@
 //         cout<<arr[i]<<" ";
 //     }
 // }
-// hasing method
+// hasing method====>
+//#include<iostream>
+// using namespace std;
+// int main(){
+//     int a;
+//     cin >> a;
+//     int arr[a];
+//     for (int i=0;i<a;i++) {
+//         cin >> arr[i];
+//     } 
+//     int hash[a]={0};
+//     for (int i =0;i<a;i++) {
+//         hash[arr[i]]+=1;
+//     }
+//     int b;
+//     cin>>b;
+//     while (b--) {
+//         int n;
+//         cin >> n;
+//         cout << hash[n] << endl;
+//     }
+//     for(int i=0;i<a;i++){
+//         int index=-1;
+//         int target=hash[arr[i]];
+//         if(hash[i]==target){
+//             index=i;
+//             if(arr[i]==index){
+//                 arr[i]=index;
+//             }
+//         }
+//     }
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+// }
 
+//shifting left by one;
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int a;
+//     cin>>a;
+//     int arr[a];
+//     for(int i=0;i<a;i++){
+//         cin>>arr[i];
+//     }
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     cout<<endl;
+//     int b=arr[0];
+//     for(int i=0;i<a;i++){
+//         arr[i]=arr[i+1];
+//     }
+//     arr[a-1]=b;
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+// }
 
+//shifting left by n number;
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int a,s;
+//     cin>>a;
+//     cin>>s;
+//     int arr[a],temp[s];
+//     for(int i=0;i<a;i++){
+//         cin>>arr[i];
+//     }
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }cout<<endl;
+//     for(int i=0;i<s;i++){
+//         temp[i]=arr[i];
+//     }
+//     for(int i=0;i<a;i++){
+//         arr[i]=arr[i+s];
+//     }
+//     for(int i=1;i<=s;i++){
+//         arr[a-i]=temp[s-i];
+//     }
+//      for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+// }
 
+//moving all zeros to end;
