@@ -354,3 +354,72 @@
 // }
 
 //moving all zeros to end;
+//method 1 ================>
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int a;
+//     int num=0,c=0;
+//     cin>>a;
+//     int arr[a];
+//     for(int i=0;i<a;i++){
+//         cin>>arr[i];
+//     }
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     cout<<endl;
+//     for(int i=0;i<a;i++){
+//         if(arr[i]!=0){num++;}
+//     }
+//     int temp[num];
+//     for(int i=0;i<a;i++){
+//         if(arr[i]!=0){
+//             temp[c]=arr[i];
+//             c++;
+//         }
+//     }
+//     for(int i=0;i<a;i++){arr[i]=0;}
+//     for(int i=0;i<num;i++){arr[i]=temp[i];}
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+// }
+//method 2 ===========================>
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int a;
+//     int b=0;
+//     int count=0;
+//     cin>>a;
+//     int arr[a];
+//     for(int i=0;i<a;i++){
+//         cin>>arr[i];
+//     }
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     cout<<endl;
+//     for(int i=0;i<a;i++){
+//         if(arr[i]==0){
+//             count++;}
+//     }
+//     int temp[count];
+//     for(int i=0;i<a;i++){
+//         if(arr[i]==0){
+//             temp[b]=arr[i];
+//             b++;
+//             for(int j=i;j<a;j++){
+//                 arr[j]=arr[j+1];}        
+//         }
+//     }
+//     for(int i=1;i<=count;i++){
+//         arr[a-i]=temp[count-i];
+//     }
+//     for(int i=0;i<a;i++){
+//         cout<<arr[i]<<" ";
+//     }
+// }
+
+
