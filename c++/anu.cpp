@@ -220,7 +220,6 @@
 // }
 
 //remove dublicate from array ;
-// method 1==>
 // #include <iostream>
 // using namespace std;
 // int main(){
@@ -259,41 +258,6 @@
 //             }
 //                 a--;
 //                 i--;
-//         }
-//     }
-//     for(int i=0;i<a;i++){
-//         cout<<arr[i]<<" ";
-//     }
-// }
-// hasing method====>
-//#include<iostream>
-// using namespace std;
-// int main(){
-//     int a;
-//     cin >> a;
-//     int arr[a];
-//     for (int i=0;i<a;i++) {
-//         cin >> arr[i];
-//     } 
-//     int hash[a]={0};
-//     for (int i =0;i<a;i++) {
-//         hash[arr[i]]+=1;
-//     }
-//     int b;
-//     cin>>b;
-//     while (b--) {
-//         int n;
-//         cin >> n;
-//         cout << hash[n] << endl;
-//     }
-//     for(int i=0;i<a;i++){
-//         int index=-1;
-//         int target=hash[arr[i]];
-//         if(hash[i]==target){
-//             index=i;
-//             if(arr[i]==index){
-//                 arr[i]=index;
-//             }
 //         }
 //     }
 //     for(int i=0;i<a;i++){
