@@ -24,9 +24,9 @@ public class anu {
         System.out.println(c);
         System.out.println(c1);
         System.out.println( logic(a1, b1));
-        // Scanner d=new Scanner(System.in);
-        // System.out.println("enter number = ");
-        // int f=d.nextInt();
-        // System.out.println(f);
+        Scanner d =new Scanner(System.in);
+        System.out.print("enter number = ");
+        int f=d.nextInt();
+        System.out.println(f);
     }
 }
