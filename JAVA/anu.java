@@ -27,7 +27,9 @@ public class anu {
         Scanner d =new Scanner(System.in);
         System.out.print("enter number = ");
         int f=d.nextInt();
+        System.out.print("enter number = ");
+        int g=d.nextInt();
         System.out.println(f);
-        System.out.println("Hello World");
+        System.out.println(g);
     }
 }
