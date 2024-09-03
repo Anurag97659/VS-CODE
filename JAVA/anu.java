@@ -28,5 +28,6 @@ public class anu {
         System.out.print("enter number = ");
         int f=d.nextInt();
         System.out.println(f);
+        System.out.println("Hello World");
     }
 }
