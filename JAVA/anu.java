@@ -31,5 +31,6 @@ public class anu {
         int g=d.nextInt();
         System.out.println(f);
         System.out.println(g);
+        System.out.println(g);
     }
 }
