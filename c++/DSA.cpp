@@ -290,7 +290,7 @@
 // }
 
 //shifting left by n number;
-// #include <iostream>
+//#include <iostream>
 // using namespace std;
 // int main(){
 //     int a,s;
@@ -299,13 +299,10 @@
 //     int arr[a],temp[s];
 //     for(int i=0;i<a;i++){
 //         cin>>arr[i];
-//     }
-//     for(int i=0;i<a;i++){
-//         cout<<arr[i]<<" ";
-//     }cout<<endl;
-//     for(int i=0;i<s;i++){
 //         temp[i]=arr[i];
+//         cout<<arr[i]<<" ";
 //     }
+//     cout<<endl;
 //     for(int i=0;i<a;i++){
 //         arr[i]=arr[i+s];
 //     }
@@ -385,5 +382,4 @@
 //         cout<<arr[i]<<" ";
 //     }
 // }
-
 
