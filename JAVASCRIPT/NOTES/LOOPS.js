@@ -6,28 +6,30 @@ for(let i=0; i<num.length;i++){
 }
 
 // ForEach Loop
-
 num.forEach((element) => {
   console.log(element * element)
 })
+//        or
 
-// Array.from 
-
-let name = "Harry"
-let arr = Array.from(name)
-console.log(arr)
-
-// for...of 
-
-for (let item of num){
-  console.log(item)
+for (let i=0; i<num.length; i++){
+  console.log(num[i]*num[i])
 }
 
-// for...in
+// // Array.from 
+// let name = "Harry"
+// let arr = Array.from(name)
+// console.log(arr)
 
-for (let i in num){
-  console.log(num[i])
-}
+// // for...of 
+// for (let item of num){
+//   console.log(item)
+// }
+
+// // for...in
+// for (let i in num){
+//   console.log(num[i])
+// }
+
 
 
 
