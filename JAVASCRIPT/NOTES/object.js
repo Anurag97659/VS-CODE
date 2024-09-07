@@ -41,10 +41,10 @@
 
 // //----------- makeing a function for object--------------
 //  myobj.greet = function(){// it may give error if obeject is freeze 
-//     console.log("Hellow ", this.name)//it can be written as -
+//     // console.log("Hellow ", this.name)//it can be written as -
 //     console.log(`hi ,${this.name}`)
 // }
-// console.log(myobj.greet())
+// myobj.greet()
 
 
 // // =============================================2 Object constructor=============================================
@@ -113,3 +113,13 @@
 // console.log(user[0]); // { name: 'anurag', age: 19, class: '12th' }
 // console.log(user[0].name);// anurag
 
+
+////----------------------------JSON-----------------------------------
+//// what is JSON?
+//// ans=> it is used to link api and the database, it is used to send the data from the front end to the backend and vice versa
+////json can be in { } or [ ]array
+// {
+//     "name": "anurag",  // in json the key should be in double quotes(string)
+//     "age": 19,
+//     "class": "12th",
+// }
