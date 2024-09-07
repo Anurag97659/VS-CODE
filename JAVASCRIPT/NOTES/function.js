@@ -1,14 +1,3 @@
-// object==================================
-
-let myobj = {
-    name: "anurag",
-    age: 19,
-}
-console.log(myobj); // { name: 'anurag', age: 19 }
-console.log(myobj.name); // anurag
-console.log(myobj.age); // 19
-
-
 //function===================================
 
 function sum(a, b) {  // no need to define the datatype of the parameter
@@ -17,7 +6,8 @@ function sum(a, b) {  // no need to define the datatype of the parameter
 console.log(sum(2,3)) //5
 
 
-// function can be assigned to variable
+
+// --------function can be assigned to variable----------------
 let x= function multiply(a,b){
              return a*b;
         }
