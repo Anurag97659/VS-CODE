@@ -1,4 +1,4 @@
-//function===================================
+// function===================================
 
 // function sum(a, b) {  // no need to define the datatype of the parameter
 //     return a + b;
@@ -65,9 +65,9 @@
 // let sum3 = (a, b) => ({ a: a, b: b }) //if you want to return object then you have to wrap the object in the ()
 
 
-////---------------------------------IIFF--------------------------------
-////IIFF - Immediately Invoked Function Expression
-////normal function
+// //---------------------------------IIFF--------------------------------
+// //IIFF - Immediately Invoked Function Expression
+// //normal function
 // function hello() {
 //     console.log("Hello");
 // }

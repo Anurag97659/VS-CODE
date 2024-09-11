@@ -18,9 +18,9 @@
 </body>
 <script>
     const a = document.querySelector('.week');
-    // console.log(a);
+    console.log(a);
 
-    // console.log(a.children);// it will show all elements
+    console.log(a.children);// it will show all elements
     let b= a.children;
     let c= Array.from(b);
     c.forEach(function(element){//converting html collection to array to apply forEach
@@ -31,10 +31,10 @@
     // console.log(a.lastElementChild)
 
     let d= document.querySelector('.day'); // it will select only first element
-    // console.log(d);
-    // console.log(d.nextElementSibling);// it will select next element
-    // console.log(d.previousElementSibling);// it will select previous element if available
-    // console.log(d.parentElement);// it will select parent element
+    console.log(d);
+    console.log(d.nextElementSibling);// it will select next element
+    console.log(d.previousElementSibling);// it will select previous element if available
+    console.log(d.parentElement);// it will select parent element
 
     console.log(a.childNodes)// it will show all elements including text nodes and comments 
     // it even count a line break as a text node
