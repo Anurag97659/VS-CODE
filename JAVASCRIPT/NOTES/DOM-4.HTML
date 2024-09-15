@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body style="background-color: #212121; color: white;">
+    <ul class="lang">
+        <li>javascript</li>
+        <li>java</li>
+        <li>c++</li>
+    </ul>
+    
+</body>
+<script>// task = edit the list item
+        // it can be done by innerHTML but it is not a good practice
+
+        // now to select the element
+        const edit= document.querySelector('.lang').children[1];// it can be written as:-
+        // const edit= document.querySelector('li :nth-child(2)');// it will select the second child
+
+        // creating a new element to replace the old one
+        const newedit= document.createElement('li');
+        newedit.appendChild(document.createTextNode('python'));
+
+        // replacing the old element with the new one
+        edit.replaceWith(newedit);// replacewith is a method to replace the element with the new one
+
+
+
+        //----------removing the element--------------------
+        const d= document.querySelector('.lang').children[2];
+        d.remove();// it will remove the element
+
+
+
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM function</title>
+</head>
+<body style="background-color: #212121; color: white;">
+    <ul class="lang">
+        <li>javascript</li>
+    </ul>
+
+
+</body>
+<script>// task is to make a function to add child in lang
+        // there are two ways to do this
+        // 1. normal way
+        function add(a) {
+            const b =document.createElement('li');
+            b.innerHTML=`${a}`;
+            document.querySelector('.lang').appendChild(b);// only put the parent element in which you
+            // want to append the child like here we want to append the child in lang so i put .lang
+        }
+        add('java')
+
+        // 2.optimized way
+        function add2(a){
+            const b = document.createElement('li');
+            b.appendChild(document.createTextNode(a));
+            document.querySelector('.lang').appendChild(b);
+        }
+        add2('c++')
+   
+</script>
+</html>

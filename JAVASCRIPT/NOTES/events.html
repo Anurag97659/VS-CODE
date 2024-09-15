@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="color: white; background-color: #212121;">
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+    <h1 id="hi">ANURAG NIDHI </h1>
+</body>
+<script>
+   let a = function(){
+        let bod = document.querySelector('body')
+        bod.style.backgroundColor = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')'
+   }
+   let x;
+   let b=function(){
+     x= setInterval(a,1000)  // its a function which will execute when this function will be called which prints the another function 'a' in the interval of time 1 sec
+   }
+   let c=function (){
+    clearInterval(x) // its a function which ends the setinterval call 
+   }
+    document.getElementById('start').addEventListener('click',b)
+    document.getElementById('stop').addEventListener('click',c)
+</script>
+</html>
