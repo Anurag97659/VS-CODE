@@ -11,11 +11,30 @@
 
 // getAllUsers()
 
-fetch('https://jsonplaceholder.typicode.com/users')
+fetch('https://api.github.com/users/yuvraj7773786')
 .then((response) => {
     return response.json()
 })
 .then((data) => {
-    console.log(data);
+    console.log(data.name);
 })
 .catch((error) => console.log(error))
+
+// class User{
+//     constructor(name, email){
+//         this.name = name
+//         this.email = email
+//     }
+//     get email(){
+//         return this._email.toUpperCase()
+//     }
+//     set email(email){
+//         this._email = email
+//     }
+// }
+// let a = new User('Anurag','anurag.nidhi2005@gamil.com')
+// let b = new User('Anu','jfklfjlkadn')
+// let c = new User('An','jfklfj12454lkadn')
+// let d = new User('A','jfklfjdfjkdfjlkadn')
+// // console.log(a.email)
+// console.table([a.email,b.email,c.email,d.email])

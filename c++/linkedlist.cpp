@@ -94,7 +94,8 @@ int main(){
  insertatbegin(12);
  insertatbegin(11);
 insertatend(13);
-deletetionatend();
+insertbed(15,1);
+// deletetionatend();
 //  insertatbegin(10);
 //  insertatbegin(9);
 //  insertatbegin(8);
