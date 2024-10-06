@@ -1,19 +1,29 @@
-/*Problem 1: Sum of Even Numbers
-Write a Java program to calculate the sum of all even numbers between 1 and 100 using a 
-for loop.
-Requirements:
-- Use a for loop to iterate through numbers from 1 to 100.
-- Check if a number is even, and if so, add it to a running total.
-- Print the sum at the end.*/
 #include <iostream>
+# include<algorithm>
 using namespace std;
 int main(){
-    int sum =0;
-    for(int i=0;i<101;i++){
-        if(i%2==0){
-            sum+=i;
+   int start;
+   cout<<"Enter the starting number: ";
+    cin>>start;
+    int end;
+    cout<<"Enter the ending number: ";
+    cin>>end;
+    int gap;
+    cout<<"Enter the gap: ";
+    cin>>gap;
+    if(gap==1){
+        for(int i=start;i<=end;i+=2){
+            cout<<i<<endl;
+        }
+
+    }
+    else if (gap==2){
+        for(int i=start;i<=end;i+=3){
+            cout<<i<<endl;
         }
     }
-    cout<<sum<<endl;
+    else{
+        cout<<"Gap should be either 1 or 2"<<endl;
+    }
+    
 }
-
