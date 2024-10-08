@@ -1,3 +1,17 @@
+# ** ANURAG NIDHI 2301010174 **
+#  1. Bank Account Management System:
+• Design a class named BankAccount with the following data members:
+    – Account number
+    – Account holder name
+    – Account type (e.g., savings, current)
+    – Account balance
+• Member functions:
+    – Methods to set account details (setAccountDetails()).
+    – Methods to deposit, withdraw, and check balance.
+• Objective: Manage individual bank accounts, perform transactions, and
+   maintain account balances.
+## CODE : 
+```java
 
 class BankAccount{
     public int Account_number;
@@ -37,3 +51,21 @@ public class anu {
       
     }
 }
+```
+## OUTPUT:
+```
+Account holder name = Anurag_Nidhi
+Account number = 1234567890
+Account type = savings
+Account balance = 10
+
+Account holder name = Anurag_Nidhi
+Account number = 1234567890
+Account type = savings
+Account balance = 100
+
+Account holder name = Anurag_Nidhi
+Account number = 1234567890
+Account type = savings
+Account balance = 90
+```

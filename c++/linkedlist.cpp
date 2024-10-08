@@ -59,17 +59,9 @@ void deletetionatany(int a){
     while(linkedlist->next != NULL && i !=a-1){
         linkedlist=linkedlist->next; i++;   
     }
-    // cout<<linkedlist->data;
     struct node *tmp = linkedlist->next;
     cout << endl;
-    cout << linkedlist->next << endl;
-    cout << &tmp << endl;
-    cout << tmp << endl;
     linkedlist -> next = linkedlist -> next -> next;
-    cout << "After change" << endl;
-    cout << linkedlist -> next << endl;
-    cout << tmp << endl;
-    cout << tmp -> data << endl;
 }
 
 void deleltetionatstart(){
@@ -103,8 +95,8 @@ insertbed(15,1);
 //  printList();
 //  cout<<endl<<"linkedlist inserted "<<endl;
 //  insertbed(100,2);
-//  printList();
-//  deletetionatany(3);
+ printList();
+ deletetionatany(1);
 //  cout <<endl <<"Linkedlist deleted ";
  printList();
 }
