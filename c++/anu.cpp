@@ -1,25 +1,26 @@
-#include <iostream>
-#include <vector>
+#include<iostream>
+#include<vector>
 using namespace std;
 class Solution {
-  public:
-    int largest(vector<int> &arr) {
-        int a =-1;
-         int size = sizeof(arr) / sizeof(arr[0]);
-        for(int i=0;i<size;i++){
-            cout <<i<<endl;
-            if(arr[i]>=a){
-                a=arr[i];
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int n = nums.size();
+        if(n==0) return 0;
+        int i=0;
+        for(int j=1;j<n;j++){
+            if(nums[j]!=nums[i]){
+                i++;
+                nums[i] = nums[j];
             }
-            cout<<a<<endl;
         }
-        return a;
+        return i+1;
+        
     }
 };
 int main(){
-   vector<int> arr({1,2,3,4,56,22,222});
-   Solution a;
-   a.largest(arr);
-}
-
+    Solution obj;
+    vector<int> nums = {1,1,2};
+    obj.removeDuplicates(nums);
     
+    return 0;
+}
