@@ -1,75 +1,50 @@
-class TimeManagement {
-    int hours;
-    int minutes;
-    int seconds;
+import java.util.*;
 
-    TimeManagement(int hours, int minutes, int seconds) {
-        this.hours = hours;
-        this.minutes = minutes;
-        this.seconds = seconds;
-    }
-
-    TimeManagement(int hours, int minutes) {
-        this.hours = hours;
-        this.minutes = minutes;
-    }
-
-    TimeManagement(int hours) {
-        this.hours = hours;
-    }
-
-    void add(int hours, int minutes, int seconds) {
-        this.hours += hours;
-        this.minutes += minutes;
-        this.seconds += seconds;
-    }
-
-    void add(int hours, int minutes) {
-        this.hours += hours;
-        this.minutes += minutes;
-    }
-
-    void add(int hours) {
-        this.hours += hours;
-    }
-
-    void subtract(int hours, int minutes, int seconds) {
-        this.hours -= hours;
-        this.minutes -= minutes;
-        this.seconds -= seconds;
-    }
-
-    void subtract(int hours, int minutes) {
-        this.hours -= hours;
-        this.minutes -= minutes;
-    }
-
-    void subtract(int hours) {
-        this.hours -= hours;
-    }
-
-    
-}
-public class anu{
-    public static void main(String[] args) {
+public class anu {
+    int n = 0;
+    static void input(){
+        System.out.println("Enter the size of the array: ");
+        Scanner scanner = new Scanner(System.in);
         
-        TimeManagement t = new TimeManagement(10, 30, 45);
-        t.add(2, 15, 30);
-        System.out.println("Time after adding 2 hours, 15 minutes, and 30 seconds: " + t.hours + " hours " + t.minutes + " minutes " + t.seconds + " seconds");
-        t.subtract(1, 10, 15);
-        System.out.println("Time after subtracting 1 hour, 10 minutes, and 15 seconds: " + t.hours + " hours " + t.minutes + " minutes " + t.seconds + " seconds");
-
-        TimeManagement t2 = new TimeManagement(10, 30);
-        t2.add(2, 15);
-        System.out.println("Time after adding 2 hours and 15 minutes: " + t2.hours + " hours " + t2.minutes + " minutes");
-        t2.subtract(1, 10);
-        System.out.println("Time after subtracting 1 hour and 10 minutes: " + t2.hours + " hours " + t2.minutes + " minutes");
-
-        TimeManagement t3 = new TimeManagement(10);
-        t3.add(2);
-        System.out.println("Time after adding 2 hours: " + t3.hours + " hours");
-        t3.subtract(1);
-        System.out.println("Time after subtracting 1 hour: " + t3.hours + " hours");
-
+        try {
+            n = scanner.nextInt();
+            if (n <= 0) {
+                System.out.println("Please enter a positive integer for the array size.");
+                input();
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Non-int type entered. Please enter an integer value.");
+            input();;
+        }
     }
-}
+    int arr[] = new int[n];
+    static void array(){
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter Element " + (i + 1) + ": ");
+            try {
+                arr[i] = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Non-int type entered. Please enter an int value.");
+                scanner.nextInt(); 
+                i--; 
+            }
+        }
+    }
+    static void indexprompt(){
+        try {
+            System.out.println("Enter an index (0 to " + (n - 1) + "): ");
+            int index = scanner.nextInt();
+            System.out.println("Array value at index " + index + ": " + arr[index]);
+        } catch (InputMismatchException e) {
+            System.out.println("Non-int type entered. Please enter an integer.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid index. Please enter a number between 0 and " + (n - 1));
+        }
+    }
+    
+    public static void main(String[] args) {
+       input();
+       array();
+       indexprompt();
+       
+}}
