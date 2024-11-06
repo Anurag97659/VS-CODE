@@ -19,7 +19,18 @@ void printList(){
  }
  cout << "]";
 }
-
+void reverse(){
+    struct node *prev = NULL;
+    struct node *temp = head;
+    struct node *k;
+    while(temp != NULL){
+    k = temp->next;
+    temp->next = prev;
+    prev = temp;
+    temp = k;
+    }
+    head = prev;
+}
 void insertatbegin(int data){
  struct node *lk = (struct node*) malloc(sizeof(struct node));
  lk->data = data;
