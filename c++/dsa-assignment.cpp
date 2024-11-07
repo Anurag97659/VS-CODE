@@ -19,8 +19,8 @@
 // int main()
 // {
 //     int n = 5;
-//     vector<int> arr = {2, 6, 5, 8, 11};
-//     int target = 14;
+//     vector<int> arr = {2, 6, 5, 8, 11}
+//     int target = 14;;
 //     vector<int> ans = twoSum(n, arr, target);
 //     cout << "This is the answer for variant 2: [" << ans[0] << ", "
 //          << ans[1] << "]" << endl;
@@ -37,7 +37,7 @@
 
 
 
-//2) Find the number that appears once
+//2) Find the number that appear once
 // #include <iostream>
 // #include <vector>
 // using namespace std;
@@ -73,7 +73,7 @@
 
 
 
-// 3) find the reverse of an linked list
+// 3) find the reverse of a linked list
 // #include <bits/stdc++.h>
 // #include <string>
 // using namespace std;
@@ -136,7 +136,7 @@
 
 
 
-// 4) impletation of stack using queue
+// 4) implementation of stack using queue
 // #include<bits/stdc++.h>
 // using namespace std;
 
@@ -188,7 +188,7 @@
 
 
 
-// 5) Count Maximum Consecutive One's in the array
+// 5) Count Maximum Consecutive One in the array
 #include <bits/stdc++.h>
 using namespace std;
 class Solution {
