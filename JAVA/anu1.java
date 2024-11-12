@@ -1,6 +1,11 @@
 import java.util.*;
+ interface payment{
+    void addMoney(int money);
+    void tranctions(int money);
+    void tranctions_history();  
+}
 
-class Payment_Management{
+class Payment_Management implements payment{
     public int balace = 0;
     public int [] transactions_history_cash = new int[1000];
     public int cash=0;
@@ -10,6 +15,9 @@ class Payment_Management{
     public int cheque=0;
     public int [] transactions_history_online = new int[1000];
     public int online=0;
+    public int [] transactions_history_credit = new int[1000];
+    public int credit=0;
+    public int credit_limit=100000;
 
     public void addMoney(int money){
         balace += money;
@@ -22,9 +30,10 @@ class Payment_Management{
         System.out.println("2. Card");
         System.out.println("3. Cheque");
         System.out.println("4. Online");
+        System.out.println("5. Credit");
         int mode = input.nextInt();
         // input.close();
-       if(mode > balace){System.out.println("Insufficient balance ");}
+       if(money > balace){System.out.println("Insufficient balance ");}
        else{
         if(mode==1){
             balace= balace - money;
@@ -33,22 +42,31 @@ class Payment_Management{
         }
         else if(mode==2){
             balace= balace - money;
-            transactions_history_cash[card] = money;
+            transactions_history_card[card] = money;
             card++;
         }
         else if(mode==3){
             balace= balace - money;
-            transactions_history_cash[cheque] = money;
+            transactions_history_cheque[cheque] = money;
             cheque++;
         }
         else if(mode==4){
             balace= balace - money;
-            transactions_history_cash[online] = money;
+            transactions_history_online[online] = money;
             online++;
         }
+        else if(mode==5){
+            if(money>credit_limit){
+                System.out.println("Credit limit exceeded");
+            }
+            else{
+                transactions_history_credit[credit] = money;
+                credit_limit= credit_limit - money;
+                credit++;
+            }
        }
 
-    }
+    }}
     public void tranctions_history(){
         Scanner input1 = new Scanner(System.in);
         System.out.println("Enter the mode of payment: ");
@@ -56,6 +74,7 @@ class Payment_Management{
         System.out.println("2. Card");
         System.out.println("3. Cheque");
         System.out.println("4. Online");
+        System.out.println("5. credit");
         int mode1 = input1.nextInt();
         // input1.close();
         if(mode1==1){
@@ -78,6 +97,11 @@ class Payment_Management{
                 System.out.println("Online: "+transactions_history_online[i]);
             }
         }
+        else if(mode1==5){
+            for(int i=0; i<=credit; i++){
+                System.out.println("Credit: "+transactions_history_credit[i]);
+            }
+        }
     }
     void balace(){
         System.out.println("Your Balance = "+balace);
@@ -88,10 +112,19 @@ class Payment_Management{
 
 
 
-public class anu {
+public class anu1 {
     public static void main(String[] args) {
         Payment_Management obj = new Payment_Management();
         obj.addMoney(1000);
+        obj.tranctions(500);
+        obj.tranctions(200);
+        obj.tranctions(300);
+        obj.tranctions(100);
+        obj.tranctions_history();
+        obj.balace();
+        System.out.println();
+        System.out.println();
+       
         obj.tranctions(500);
         obj.tranctions(200);
         obj.tranctions(300);
