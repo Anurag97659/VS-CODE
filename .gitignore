@@ -1,2 +1,2 @@
-./java/.class
-./c++/.exe
+c++/**/*.exe
+java/**/*.class
