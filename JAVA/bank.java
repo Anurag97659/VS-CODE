@@ -25,12 +25,8 @@ class Payment_Management implements payment{
     
     public void tranctions(int money){
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter the mode of payment: ");
-        System.out.println("1. Cash");
-        System.out.println("2. Card");
-        System.out.println("3. Cheque");
-        System.out.println("4. Online");
-        System.out.println("5. Credit");
+        System.out.println("1.Cash 2.Card 3.Cheque 4.Online 5.credit");
+        System.out.print("Enter the mode of payment: ");
         int mode = input.nextInt();
         // input.close();
        if(money > balace){System.out.println("Insufficient balance ");}
@@ -69,12 +65,8 @@ class Payment_Management implements payment{
     }}
     public void tranctions_history(){
         Scanner input1 = new Scanner(System.in);
-        System.out.println("Enter the mode of payment: ");
-        System.out.println("1. Cash");
-        System.out.println("2. Card");
-        System.out.println("3. Cheque");
-        System.out.println("4. Online");
-        System.out.println("5. credit");
+        System.out.println("1.Cash 2.Card 3.Cheque 4.Online 5.credit");
+        System.out.print("Enter the mode of payment: ");
         int mode1 = input1.nextInt();
         // input1.close();
         if(mode1==1){
@@ -107,30 +99,36 @@ class Payment_Management implements payment{
         System.out.println("Your Balance = "+balace);
     }
 }
-
-    
-
-
-
 public class bank {
     public static void main(String[] args) {
         Payment_Management obj = new Payment_Management();
-        obj.addMoney(1000);
-        obj.tranctions(500);
-        obj.tranctions(200);
-        obj.tranctions(300);
-        obj.tranctions(100);
+        obj.addMoney(100000000);
+        System.out.println("cash========================");
+        obj.tranctions(1500);
         obj.tranctions_history();
         obj.balace();
-        System.out.println();
-        System.out.println();
        
+        System.out.println("credit========================");
         obj.tranctions(500);
-        obj.tranctions(200);
-        obj.tranctions(300);
-        obj.tranctions(100);
         obj.tranctions_history();
         obj.balace();
+       
+        System.out.println("cheque========================");
+        obj.tranctions(2500);
+        obj.tranctions_history();
+        obj.balace();
+       
+        System.out.println("card========================");
+        obj.tranctions(6500);
+        obj.tranctions_history();
+        obj.balace();
+        
+        System.out.println("online========================");
+        obj.tranctions(50000);
+        obj.tranctions_history();
+        obj.balace();
+       
+
     }
              
 }
