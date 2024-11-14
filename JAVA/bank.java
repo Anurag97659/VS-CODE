@@ -112,7 +112,7 @@ class Payment_Management implements payment{
 
 
 
-public class anu1 {
+public class bank {
     public static void main(String[] args) {
         Payment_Management obj = new Payment_Management();
         obj.addMoney(1000);
