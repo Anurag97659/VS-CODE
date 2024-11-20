@@ -55,7 +55,7 @@ void insertbed(int data,int x){
 }
 
 void insertatend(int data){
-    struct node *lk = (struct node*) malloc(sizeof(struct node));
+    struct node *lk = new node();
     lk->data = data;
     struct node *linkedlist = head;
     while(linkedlist->next != NULL ){
