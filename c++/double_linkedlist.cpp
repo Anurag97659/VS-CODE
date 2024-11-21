@@ -69,6 +69,37 @@ void addatany(int data,int where){
     temp->prev=before;
 }
 
+void deleteatend(){
+    struct node* temp=head;
+    while(temp->next!=tail){
+        temp=temp->next;
+    }
+    tail=temp;
+    tail->next=NULL;
+}
+
+void deleteatstart(){
+    struct node* temp=head;
+    head=head->next;
+    head->prev=NULL;
+    temp->next=NULL;
+    delete temp;
+}
+
+void deleteatany(int a){
+    struct node* temp=head;
+    int i=0;
+    while(i!=a-1 && temp->next!=NULL){
+        temp=temp->next;
+        i++;
+    }
+    struct node* setprev = temp->next->next;
+    struct node* deletenode= temp->next;
+    temp->next=temp->next->next;
+    setprev->prev=temp;
+    delete deletenode;
+}
+
 int main(){
     // addatend(101);
     // addatend(202);
@@ -82,8 +113,10 @@ int main(){
     addatstart(50);
     addatany(35,2);
     printList();
+    deleteatany(2);
+    printList();
     cout<<endl;
-   cout<<endl<<"head = "<<head->data<<"              tail = "<<tail->data;
+   cout<<endl<<"head = "<<head->data<<"           tail = "<<tail->data;
    cout<<endl<<"1 = "<<head->next->data<<"              3 = "<<tail->prev->data;
    cout<<endl<<"2 = "<<head->next->next->data<<"              2 = "<<tail->prev->prev->data;
    cout<<endl<<"3 = "<<head->next->next->next->data<<"              1 = "<<tail->prev->prev->prev->data;
