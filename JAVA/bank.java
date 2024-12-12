@@ -1,11 +1,5 @@
 import java.util.*;
- interface payment{
-    void addMoney(int money);
-    void tranctions(int money);
-    void tranctions_history();  
-}
-
-class Payment_Management implements payment{
+class Payment_Management {
     public int balace = 0;
     public int [] transactions_history_cash = new int[1000];
     public int cash=0;
