@@ -16,7 +16,7 @@ class Node{
         this->data = data;
         left = NULL;
         right = NULL;
-        next = NULL;
+        next = NULL:
     }
     void height(){
         int l=0,r=0;
