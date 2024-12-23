@@ -80,5 +80,7 @@ public class  anu{
        } catch (Exception e) {
         System.out.println("Exception Occurred::::"+ e);
        }
+        file.delete();
+        fil.delete();
 }
 }
