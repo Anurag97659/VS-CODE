@@ -3,6 +3,7 @@ import java.io.*;
 public class fileHandling{
     public static void main(String[] args){
         String[] temp = new String[10];
+        int i = 0;
        try {
 
         File a = new File("anu.txt");
@@ -23,7 +24,6 @@ public class fileHandling{
 
         BufferedReader c = new BufferedReader(new FileReader(a));
         String line ;
-        int i = 0;
         while((line = c.readLine())!= null){
             System.out.println(line);
             temp[i] = line;
@@ -40,8 +40,8 @@ public class fileHandling{
          System.out.println("!!!!!!!!"+ e + "!!!!!!!!");
        }
        
-        for(int i = 0; i<temp.length; i++){
-            System.out.println(temp[i]);
+        for(int j = 0; j<=i-1; j++){
+            System.out.println(temp[j]);
         }
     }
 }
