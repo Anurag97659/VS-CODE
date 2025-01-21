@@ -19,5 +19,5 @@ int main(){
         if(arr[i]==element)c++;
     }
     if(c>size/2)cout<<element;
-    else cout<<"No majority element";
+    else cout<<"No majority element ";
 }
