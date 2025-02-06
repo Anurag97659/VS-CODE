@@ -7,7 +7,7 @@ int linearSearch(vector<int>& arr,int value){
     int stepCount=0;
     for(int i=0;i<arr.size();i++){
         stepCount++; 
-        if (arr[i]==value){return stepCount;}
+        if(arr[i]==value){return stepCount;}
     }
     return stepCount;
 }
@@ -45,7 +45,7 @@ void analyzesearchingalgorithms(){
         cout<<"Average Case= "<<linearSearch(arr,randomcase)<<"steps\n";
         cout<<"Worst Case= "<<linearSearch(arr,worstcase)<<"steps\n";
         cout<<"Binary Search----------"<<endl;
-        cout<<"Best Case= "<<binarySearch(arr,arr[size/2])<<"steps"<<endl;
+        cout<<"Best Case= "<<binarySearch(arr,arr[(size-1)/2])<<"steps"<<endl;
         cout<<"Average Case= "<<binarySearch(arr,randomcase)<<"steps"<<endl;
         cout<<"Worst Case= "<<binarySearch(arr,worstcase)<<"steps"<<endl; 
         cout<<"==================================================================="<<endl<<endl;
