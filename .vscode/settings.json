@@ -19,6 +19,9 @@
         "unordered_map": "cpp",
         "unordered_set": "cpp",
         "system_error": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "memory": "cpp",
+        "thread": "cpp",
+        "typeindex": "cpp"
     }
 }

@@ -57,12 +57,15 @@ void insertbed(int data,int x){
 void insertatend(int data){
     struct node *lk = new node();
     lk->data = data;
+    lk->next=NULL;
+    if(head==NULL){
+        head=lk;
+    }
     struct node *linkedlist = head;
     while(linkedlist->next != NULL ){
     linkedlist = linkedlist->next;
     }
-    linkedlist->next=lk;// some error is there   
-      lk->next=NULL;
+    linkedlist->next=lk; 
 }
 
 void deletetionatany(int a){
@@ -95,21 +98,38 @@ void deletetionatend(){
     cout<<temp->next<<endl;
 }
 
+void cycle(){
+    //Floyd’s Cycle Detection Algorithm (Tortoise & Hare)
+    struct node *first=head;
+    struct node *second=head;
+    while(second!=NULL && second->next!=NULL){
+        first=first->next;
+        second=second->next->next;
+        if(first==second){
+            cout<<"cycle found";
+            return;
+        }
+    }
+}
+void createCycle(){
+    struct node *temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    cout<<endl<<"temp="<<temp->data<<endl<<"temp->next = "<<temp->next<<endl;
+    temp->next=head;
+    cout<<"cycle created\n";
+    cout<<"temp="<<temp->data<<endl<<"temp->next = "<<temp->next->data<<endl;
+}
+
 int main(){
- insertatbegin(12);
- insertatbegin(11);
-insertatend(13);
-insertbed(15,1);
-// deletetionatend();
-//  insertatbegin(10);
-//  insertatbegin(9);
-//  insertatbegin(8);
-//  cout<<endl<<"linkedlist "<<endl;
-//  printList();
-//  cout<<endl<<"linkedlist inserted "<<endl;
-//  insertbed(100,2);
- printList();
- deletetionatany(1);
-//  cout <<endl <<"Linkedlist deleted ";
- printList();
+   insertatbegin(1);
+    insertatbegin(2);
+    insertatbegin(3);
+    insertatbegin(4);
+    insertatend(5);
+    printList();
+    // createCycle();
+    // cycle();
+
 }
