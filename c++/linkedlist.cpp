@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <string>
+#include<unordered_map>
 using namespace std;
 
 struct node {
@@ -33,14 +34,15 @@ void reverse(){
 }
 
 void insertatbegin(int data){
-    struct node *lk = (struct node*) malloc(sizeof(struct node));
+    // struct node *lk = (struct node*) malloc(sizeof(struct node));
+    struct node *lk=new node();
     lk->data = data;
     lk->next = head;
     head = lk;
 }
 
 void insertbed(int data,int x){
-    struct node *lk = (struct node*) malloc(sizeof(struct node));
+    struct node *lk = new node();
     lk->data = data;
     struct node *linkedlist = head;
     int i=0;
@@ -69,7 +71,7 @@ void insertatend(int data){
 }
 
 void deletetionatany(int a){
-    struct node *temp = (struct node*) malloc(sizeof(struct node));
+    struct node *temp = new node();
     struct node *linkedlist = head;
     int i=0;
     while(linkedlist->next != NULL && i !=a-1){
@@ -111,6 +113,7 @@ void cycle(){
         }
     }
 }
+
 void createCycle(){
     struct node *temp=head;
     while(temp->next!=NULL){
@@ -122,14 +125,69 @@ void createCycle(){
     cout<<"temp="<<temp->data<<endl<<"temp->next = "<<temp->next->data<<endl;
 }
 
-int main(){
-   insertatbegin(1);
-    insertatbegin(2);
-    insertatbegin(3);
-    insertatbegin(4);
-    insertatend(5);
-    printList();
-    // createCycle();
-    // cycle();
+void pali(){
+    struct node *temp=head;
+    unordered_map<int,int> m;
+    int i=0;
+    while(temp!=NULL){
+        m[i]=temp->data;
+        i++;
+        temp=temp->next;
+    }cout<<endl;
+    for(int i=0;i<m.size();i++){
+        cout<<i<<"->"<<m[i];
+    }
+    
+    struct node *prev = NULL;
+    struct node *temp1 = head;
+    struct node *k;
+    while(temp1 != NULL){
+        k = temp1->next;
+        temp1->next = prev;
+        prev = temp1;
+        temp1 = k;
+    }
+    head = prev;
+    struct node *temp2=head;
+    int j=0;
+    while(temp2!=NULL){
+        if(temp2->data!=m[j]){
+            cout<<"not palindrome";
+            break;
+        }
+        temp2=temp2->next;
+        j++;
+        if(j==m.size()){
+            cout<<"palindrome";
+            break;
+        }
+    }
+    
+}
 
+void selectionSort(){
+    struct node *temp=head;
+    struct node *temp1=head;
+    while(temp!=NULL){
+        temp1=temp->next;
+        while(temp1!=NULL){
+            if(temp->data>temp1->data){
+                int a = temp->data;
+                temp->data=temp1->data;
+                temp1->data=a;
+            }
+            temp1=temp1->next;
+        }
+        temp=temp->next;
+    }
+}
+
+int main(){
+    insertatbegin(1);
+    insertatbegin(2);
+    insertatbegin(2);
+    insertatbegin(1);
+    printList();
+    selectionSort();
+    printList();
 }
