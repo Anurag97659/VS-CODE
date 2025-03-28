@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include <string>
 #include<unordered_map>
+#include<map>
 using namespace std;
 
 struct node {
@@ -104,6 +105,8 @@ void cycle(){
     //Floyd’s Cycle Detection Algorithm (Tortoise & Hare)
     struct node *first=head;
     struct node *second=head;
+    cout<<first->data<<endl;
+    cout<<first<<endl;
     while(second!=NULL && second->next!=NULL){
         first=first->next;
         second=second->next->next;
@@ -182,12 +185,46 @@ void selectionSort(){
     }
 }
 
+void detect_Cycle_And_Return_The_cycle_POINT(){
+        struct node *first=head;
+        struct node* second=head;
+        while(second!=NULL && second->next!=NULL){
+            first=first->next;
+            second=second->next->next;
+            if(first==second){break;}
+        }
+        if(first!=second){cout<<"no cycle";return;}
+        first=head;
+        while(second!=first){
+            second=second->next;
+            first=first->next;
+        }
+        cout<<"cycle at "<<first->data<<endl;
+}
+
+void Odd_even_list(){
+    struct node *odd=head;
+    struct node *even=head->next;
+    struct node *temp=even;
+    while(even!=NULL && even->next!=NULL){
+        odd->next=even->next;
+        odd=odd->next;
+        even->next=odd->next;
+        even=even->next;
+    }
+    odd->next=temp;
+}
+
 int main(){
     insertatbegin(1);
-    insertatbegin(2);
-    insertatbegin(2);
-    insertatbegin(1);
+    insertatend(2);
+    insertatend(3);
+    insertatend(4);
+    insertatend(5);
+    insertatend(6);
+    insertatend(7);
+    //1->2->3->4->5->6->7
     printList();
-    selectionSort();
+    Odd_even_list();
     printList();
 }
