@@ -1,38 +1,39 @@
 #include <iostream>
+#include <vector>
+#include <unordered_map>
 using namespace std;
-int main(){
-    int arr[10]={10,0,20,2,23,1,0,2,1,0};
-    int count=0;
-    int arraysize = sizeof(arr)/sizeof(arr[0]);
-    for(int i=0;i<arraysize;i++){
-        if(arr[i]<3){
-            count++;
+
+ void sortColors(vector<int>& nums) {
+        int i=0;
+        int l=0;
+        int j=nums.size() -1;
+        while(i<=j){
+            if(nums[i]==0){
+                int temp = nums[i];
+                nums[i]=nums[l];
+                nums[l]=temp;
+                i++;
+                l++;
+            }
+            else if(nums[i]==2){
+                int temp = nums[i];
+                nums[i]=nums[j];
+                nums[j]=temp;
+                j--;
+            }
+            else{
+                i++;
+            }
+        }
+        cout<<"i: "<<i<<endl;
+        cout<<"l: "<<l<<endl;
+        cout<<"j: "<<j<<endl;
+        for(int i=0;i<nums.size();i++){
+            cout<<nums[i]<<" ";
         }
     }
-    int dutch[count]={};
-    int flag=0;
-    for(int i=0;i<arraysize;i++){
-        if(arr[i]<3){
-            dutch[flag]=arr[i];
-            flag++;
-        }
-    }
-    int right = count-1;
-    int left = 0;
-    int mid = 0;
-    while(mid<=right){
-         if (dutch[mid] == 0) {
-            swap(dutch[left], dutch[mid]);
-            left++;
-            mid++;
-        } else if (dutch[mid] == 2) {
-            swap(dutch[mid], dutch[right]);
-            right--;
-        } else { 
-            mid++;
-        }
-    }
-    for(int i=0;i<count;i++){
-        cout<<dutch[i]<<" ";
-    }
+
+int main() {
+    vector<int> nums = {2, 0, 2, 1, 1, 0};
+    sortColors(nums);
 }
