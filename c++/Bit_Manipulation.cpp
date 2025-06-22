@@ -1,0 +1,214 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+
+/*
+  How does computer store sign + or - of a number?
+  ANS:=>
+   In case of int it takes 32 bits for storing the number 
+   only 31 bits are used for storing the number and 1 bit is used for storing the sign
+   if the sign bit is 0 then the number is positive and if the sign bit is 1 then the number is negative
+  
+   for example :
+                int a = 12 (binary 00000000 00000000 00000000 00001100) 
+                         postion of sign bit is 32nd bit from the right side
+
+                int b = -12 (binary 11111111 11111111 11111111 11110100) 
+                         for negative number is obtained by taking 2's complement of the positive number
+                         like in this case we take 2's complement of 12
+                         1's complement of 12 is 11111111 11111111 11111111 11110011
+                         and then we add 1 to it to get 2's complement which is 11111111 11111111 11111111 11110100
+                        so in this case also the position of sign bit is 32nd bit from the right side
+*/
+
+string decToBin(int a){
+    string ans="";
+    while(a!=1){
+        if(a%2==1)ans+="1";
+        else ans+="0";
+        a=a/2;
+    }
+    ans+="1"; 
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+
+int binToDec(string a){
+    int ans=0;
+    for(int i=0;i<a.size();i++){
+        ans=ans*2+(a[i]-'0');
+    }
+    return ans;
+}
+
+int BinToDec(string a){
+    int ans=0;
+    int size=a.length()-1;
+    for(int i=0;i<=size;i++){
+        if(a[i]=='1'){cout<<i<<" "<<ans<<endl;
+            ans+=pow(2,size-i);
+        }
+    }
+    return ans;
+}
+
+string compliment_1s(string a){
+    // 1's complement of a binary number
+    // 1's complement is obtained by flipping all bits
+    // 0s to 1s and 1s to 0s
+    // Example: 1100 -> 0011
+    for(int i=0;i<a.length();i++){
+        if(a[i]=='1')a[i]='0';
+        else a[i]='1';
+    }
+    return a;
+}
+
+string complient_2s(string b){
+    // 2's complement of a binary number
+    // 2's complement is obtained by adding 1 to the 1's complement
+    // Example: | 1100   -> |      0011    -> |    0100
+    // Example: |binary  -> | 1s complement-> | 2s complement
+    string a = compliment_1s(b);
+    int n = a.length();
+    int carry = 1;
+    for(int i =n;i>=0;i--){
+        if(a[i] == '1' && carry==1){
+            a[i] ='0';
+        } 
+        else if(carry == 1 && a[i] == '0'){
+            a[i] ='1';
+            carry =0;
+            break;
+        }
+    }
+    if(carry ==1) a ="1"+a;
+    return a;
+}
+
+string AND(string a, string b){
+    // Bitwise AND operation on two binary strings
+    // Example: 1100 AND 1010 = 1000
+    // all true = ture 
+    // one false = false
+    // basically A*B
+    string ans = "";
+    for(int i=a.length()-1;i>=0;i--){
+        if(a[i]=='1' && b[i]=='1') ans+='1';
+        else ans+='0';
+    }
+    reverse(ans.begin(),ans.end());
+    return ans;
+}
+
+string OR(string a, string b){
+    // Bitwise OR operation on two binary strings
+    // Example: 1100 OR 1010 = 1110
+    // all false = false
+    // one true = true
+    string ans = "";
+    for(int i=a.length()-1;i>=0;i--){
+        if(a[i]=='1' || b[i]=='1') ans+='1';
+        else ans+='0';
+    }
+    reverse(ans.begin(),ans.end());
+    return ans;
+}
+
+string XOR(string a, string b){
+    // Bitwise XOR operation on two binary strings
+    // Example: 1100 XOR 1010 = 0110
+    // all false = false
+    // all true = false
+    // one true = true 
+    string ans = "";
+    for(int i=a.length()-1;i>=0;i--){
+        if(a[i]=='1' && b[i]=='0') ans+='1';
+        else if(a[i]=='0' && b[i]=='1') ans+='1';
+        else ans+='0';
+    }
+    reverse(ans.begin(),ans.end());
+    return ans;
+}
+
+string NOT(string a){
+    // Bitwise NOT operation on a binary string
+    // Example: 1100 NOT = 0011
+    //  NOT operation flips all bits
+    // 0s to 1s and 1s to 0s
+    // then its check wether its  negative or positive by checking the sign bit
+    // if sign bit is 1 then its negative and if sign bit is 0 then its positive
+    // if its  negative then we take 2's complement of the number
+    // if its positive then we return the number as it is
+    /*FOR example:
+    1) 1100 NOT = 0011
+    process: 1100 -> 0011 -> 1's complement
+    then we check the sign bit which is 0 so its positive
+    hence we return the number as it is
+    2) 0001 NOT = 0010
+    process: 0001 -> 1110 -> 1's complement
+    then we check the sign bit which is 1 so its negative
+    hence we take 2's complement of the number
+                            1110 -> 0001 (1's complement)
+                            then we add 1 to it to get 2's complement which is 0010
+    */
+    // only checking the first index of string a to check the sign bit but computer checks the 32nd bit for sign
+    string b= compliment_1s(a);
+    if(b[0]=='1')return complient_2s(b);
+    else return b;
+ return 0;
+}
+
+string rightShift(string a, int n){
+    // Right shift operation on a binary string
+    // Example: 1100 >> 2 = 11
+    /*
+     basically divide by 2^n PROVE
+     =====>
+     lets say a = 1100(12) ans right shift by n = 2
+     we get 0011 (3)
+     if we divide 12 by 2^2 = 3
+     we get 3 
+     hence proved 
+    */
+    int b = a.length()-1;
+    if(n>=a.length()) return "0"; 
+    for(int i=n;i>0;i--){
+        a.erase(a.end()-1); 
+    }
+
+    return a;
+}
+
+string leftShift(string a, int n){
+    // Left shift operation on a binary string
+    // Example: 1100 << 2 = 110000
+    /*
+     basically multiply by 2^n PROVE
+     =====>
+     lets say a = 1100(12) ans left shift by n = 2
+     we get 110000 (48)
+     if we multiply 12 by 2^2 = 48
+     we get 48
+     hence proved
+    */
+   int b = a.length();
+   int diff = 32 - b;
+    if(n>diff) return "0"; 
+    else{
+        for(int i=0;i<n;i++){
+            a+='0';
+        }
+    }
+    return a;
+}
+
+
+
+int main(){
+//    cout<<complient_2s("1110")<<endl;
+   cout<<NOT("1100")<<endl;
+   cout<<NOT("0001")<< endl;
+}
