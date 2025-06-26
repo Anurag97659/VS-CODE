@@ -35,7 +35,7 @@ string decToBin(int a){
     return ans;
 }
 
-int binToDec(string a){
+int binToDec(string a){ 
     int ans=0;
     for(int i=0;i<a.size();i++){
         ans=ans*2+(a[i]-'0');
@@ -123,6 +123,8 @@ string XOR(string a, string b){
     // all false = false
     // all true = false
     // one true = true 
+    // even no of 1s= 0
+    // odd no of 1s = 1
     string ans = "";
     for(int i=a.length()-1;i>=0;i--){
         if(a[i]=='1' && b[i]=='0') ans+='1';
@@ -205,10 +207,51 @@ string leftShift(string a, int n){
     return a;
 }
 
+int SwapWithXor(int a, int b){
+    // Swapping two numbers without using a third variable
+    // Example: a = 5, b = 3
+    // After swapping: a = 3, b = 5
+    // Using XOR operation to swap the numbers
+    // a = a ^ b;
+    // b = a ^ b;
+    // a = a ^ b;
+    // example: a = 5(101), b = 3(011)
+                //a = a^b = 110(6)
+                //b = a^b = 101(5)
+                //a = a^b = 011(3)
+                // hence after swapping: a = 3, b = 5
+    a=a^b;
+    b=a^b;
+    a=a^b;
+    cout<<"a = "<<a<<endl;
+    cout<<"b = "<<b<<endl;
+    return 0;
+}
 
+int check_if_the_ith_bit_is_set_or_not(int a,int i){
+   
+// "set" means that the bit at position i is 1 (not 0).
+// Example:
+// Suppose you have n = 13 (binary: 1101):
+// The 0th bit (from right) is 1 (set)
+// The 1st bit is 0 (not set)
+// The 2nd bit is 1 (set)
+// The 3rd bit is 1 (set)
+// T(O(1) time complexity to check if the ith bit is set or not)
+
+// || METHOD 1 LEFT SHIFT ====>>>
+    if((a&(1<<i))!=0)cout<<"The "<<i<<"th bit is set"<<endl;
+    else cout<<"The "<<i<<"th bit is not set"<<endl;
+
+// || METHOD 2 RIGHT SHIFT ====>>>
+    // if((a>>i)&1)cout<<"The "<<i<<"th bit is set"<<endl;
+    // else cout<<"The "<<i<<"th bit is not set"<<endl;
+
+    return 0;
+}
 
 int main(){
-//    cout<<complient_2s("1110")<<endl;
-   cout<<NOT("1100")<<endl;
-   cout<<NOT("0001")<< endl;
+    
+    
+    return 0;
 }
