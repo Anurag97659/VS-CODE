@@ -250,8 +250,93 @@ int check_if_the_ith_bit_is_set_or_not(int a,int i){
     return 0;
 }
 
-int main(){
-    
-    
+int set_ith_bit(int a, int i){
+    // example a=9(1001), i=2
+    // we want to set the 2nd bit of 'a' to 1
+    //a=a|(1<<i); which is a=1101=13
+    a=a|(1<<i);
+    cout<<"After setting the "<<i<<"th bit, a = "<<a<<endl;
+    return a;
+}
+
+int clear_ith_bit(int a,int i){
+    // example a= 13(1101) i=2
+    // then it should be a= 1001;
+    // clear ith bit means turn 1 to 0 at 2nd index from right
+    // optimal aproach take 1(...0001)then make it ~(not operator) then left shift it by i
+    // then use & operator
+    // final formula = a & ~(1<<i)
+    a=a&(~(1<<i));
+    cout<< "After clearing the "<<i<<"th bit, a = "<<a<<endl;
+    return a;
+}
+
+int toggle_ith_bit(int a,int i){
+    //convert 1 to 0 and 0 to 1 at ith bit
+    a=a^(1<<i);
+    cout<<"After toggling the "<<i<<"th bit, a = "<<a<<" and binary = "<<decToBin(a)<<endl;
+}
+
+int remove_last_set_bit_rightmost(int a){
+    // example a= 13(1101)
+    // then it should be a= 12(1100)
+    // remove last set bit means turn 1 to 0 at rightmost index
+    // final formula = a & (a-1)
+    a=a&(a-1);
+    cout<<"After removing the last set bit, a = "<<a<<" and binary = "<<decToBin(a)<<endl;
+    return a;
+}
+
+int check_if_num_is_power_of_2(int a){
+    // example a= 16(10000), a= 8(1000),4(100), 2(10),32(100000)
+    if((a&(a-1))==0)cout<<a<<" is a power of 2"<<endl;
+    else cout<<a<<" is not a power of 2"<<endl;
     return 0;
+}
+
+int count_set_bits_bruteforce(int a){
+    // for example a=13(1101) count =3
+    // time complexity is O(log n)
+    // space complexity is O(1)
+    int count=0;
+    while(a>1){
+        // if(a%2==1)count++;
+        // a=a/2;
+        // or
+        count+=a&1;
+        a=a>>1;
+    }
+    if(a==1)count++;
+    cout<<"Number of set bits in the number is "<<count<<endl;
+    return count;
+}
+
+int count_set_bits_optimal(int a){
+    // optimal approach is to use Brian Kernighan's algorithm
+    // it works by turning off the rightmost set bit one by one
+    // and counting how many times we do this until the number becomes 0
+    // for example a=13(1101) count =3
+    // 1st iteration: a=1101(13) -> a=1100(12) count=1
+    // 2nd iteration: a=1100(12) -> a=1000(8) count=2
+    // 3rd iteration: a=1000(8) -> a=0000(0) count=3
+    // hence count=3
+    // time complexity is O(no of set bits)
+    // space complexity is O(1)
+    int count=0;
+    while(a!=0){
+        a=a&(a-1);
+        count++;
+    }
+    cout<< "Number of set bits in the number is "<<count<<endl;
+    return count;
+}
+
+void check_Odd_OR_Even(int a){
+    if((a&1)==0)cout<<"Even\n";
+    else cout<<"odd\n";
+}
+
+int main(){
+    count_set_bits_optimal(13);
+    count_set_bits_bruteforce(13);
 }
