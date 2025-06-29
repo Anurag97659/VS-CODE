@@ -289,6 +289,10 @@ int remove_last_set_bit_rightmost(int a){
 
 int check_if_num_is_power_of_2(int a){
     // example a= 16(10000), a= 8(1000),4(100), 2(10),32(100000)
+    // for 16(10000) = 10000 & 01111 = 0
+    // for 8(1000) = 1000 & 0111 = 0
+    // for 4(100) = 100 & 011 = 0
+    // but for 3(11) = 11 & 10 = 10
     if((a&(a-1))==0)cout<<a<<" is a power of 2"<<endl;
     else cout<<a<<" is not a power of 2"<<endl;
     return 0;
@@ -336,7 +340,138 @@ void check_Odd_OR_Even(int a){
     else cout<<"odd\n";
 }
 
+int min_bit_flips_to_convert_a_to_b(int a, int b){
+    // example a= 13(1101), b= 10(1010)
+    // then it should be 3
+    // we can use XOR operation to find the bits that are different
+    // then we can count the number of set bits in the result
+    // final formula = a^b
+    int c = a^b;
+    return count_set_bits_optimal(c);
+}
+
+int single_number_in_array(vector<int> arr){
+    // example arr = {1,2,3,2,1} then it should return 3
+    // we can use XOR operation to find the single number in the array
+    // because XOR of a number with itself is 0 and XOR of a number with 0 is the number itself
+    // so if we XOR all the numbers in the array, we will get the single number
+    // final formula = arr[0]^arr[1]^...^arr[n-1]
+    // time complexity is O(n) and space complexity is O(1)
+    int ans=0;
+    for(int i=0;i<arr.size();i++){
+        ans=ans^arr[i];
+    }
+    return ans;
+}
+
+vector<vector<int>> get_all_subsets(vector<int> arr){
+    // example arr = {1,2,3} then it should return all subsets
+    // we can use bit manipulation to find all subsets of an array
+    // total number of subsets of an array of size n is 2^n which is 1<<n in bit manipulation
+    // for example arr = {1,2,3} then it should return {{}, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3}}
+    /*
+
+      EXAMPLE: 1
+
+      arr=  { 1,2,3}   total subsets = 2^3 = 8
+      index   0 1 2
+        0     0 0 0 -> {}
+        1     0 0 1 -> {1}
+        2     0 1 0 -> {2}
+        3     0 1 1 -> {1,2}
+        4     1 0 0 -> {3}
+        5     1 0 1 -> {1,3}
+        6     1 1 0 -> {2,3}
+        7     1 1 1 -> {1,2,3}
+
+        EXAMPLE: 2
+
+        if total subsets is 16
+        then we can use 4 bits to represent the subsets
+        for example arr = {1,2,3,4} then it should return all subsets
+        index   0 1 2 3
+          0     0 0 0 0 -> {}
+          1     0 0 0 1 -> {1}
+          2     0 0 1 0 -> {2}
+          3     0 0 1 1 -> {1,2}
+          4     0 1 0 0 -> {3}
+          5     0 1 0 1 -> {1,3}
+          6     0 1 1 0 -> {2,3}
+          7     0 1 1 1 -> {1,2,3}
+          8     1 0 0 0 -> {4}
+          9     1 0 0 1 -> {1,4}
+          10    1 0 1 0 -> {2,4}
+          11    1 0 1 1 -> {1,2,4}
+          12    1 1 0 0 -> {3,4}
+          13    1 1 0 1 -> {1,3,4}
+          14    1 1 1 0 -> {2,3,4}
+          15    1 1 1 1 -> {1,2,3,4}
+
+    */
+    // time complexity is O(2^n) and space complexity is O(n)
+    int n = arr.size();
+    vector<vector<int>> subsets;
+    for(int i=0;i<(1<<n);i++){
+        vector<int> subset;
+        for(int j=0;j<n;j++){
+            if(i&(1<<j)){
+                subset.push_back(arr[j]);
+            }
+        }
+        subsets.push_back(subset);
+    }
+
+    cout<<"All subsets are:\n";
+    for(int i=0;i<subsets.size();i++){
+        cout<<"{ ";
+        for(int j=0;j<subsets[i].size();j++){
+            cout<<subsets[i][j]<<" ";
+        }
+        cout<<"}\n";
+    }
+    return subsets;
+}
+
+int xor_till_n(int n){
+    // for example n=5; then it should be like 1^2^3^4^5 = 1;
+    /* we can directly iterate from 1 to n and XOR all the numbers
+    
+    int ans=0;
+    for(int i=1;i<=n;i++){
+        ans=ans^i;
+    }
+    time complexity is O(n) and space complexity is O(1)
+    but this is not optimal
+    */
+    // There is a pattern in the XOR of numbers from 1 to n:
+    /*
+     n=1; 1         = 1             n=5; 1^2^3^4^5      = 1         n=9; 1^2^3^4^5^6^7^8^9          = 1
+     n=2; 1^2       = 3             n=6; 1^2^3^4^5^6    = 7         n=10; 1^2^3^4^5^6^7^8^9^10      = 11
+     n=3; 1^2^3     = 0             n=7; 1^2^3^4^5^6^7  = 0         n=11; 1^2^3^4^5^6^7^8^9^10^11   = 0
+     n=4; 1^2^3^4   = 4             n=8; 1^2^3^4^5^6^7^8= 8         n=12; 1^2^3^4^5^6^7^8^9^10^11^12= 12
+
+     n%4 = 0 => ans = n
+     n%4 = 1 => ans = 1
+     n%4 = 2 => ans = n+1
+     n%4 = 3 => ans = 0
+     n%4 = 4 => ans = n
+    */
+    // time complexity is O(1) and space complexity is O(1)
+    if(n%4==0)return n;
+    else if(n%4==1)return 1;
+    else if(n%4==2)return n+1;
+    else return 0;
+}
+
+int xor_in_range(int a, int b){
+    // for example a=2, b=5; then it should be like 2^3^4^5 = 4;
+    // we can use the xor_till_n function to find the XOR of numbers from a to b
+    // final formula = xor_till_n(b) ^ xor_till_n(a-1)
+    // time complexity is O(1) and space complexity is O(1)
+    return xor_till_n(b) ^ xor_till_n(a-1);
+}
+
 int main(){
-    count_set_bits_optimal(13);
-    count_set_bits_bruteforce(13);
+    
+
 }
