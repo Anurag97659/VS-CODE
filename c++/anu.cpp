@@ -21,5 +21,6 @@ int main(){
     q.push(5);
     cout<<q.front();
     cout<<endl<<q.back();
+    cout<<endl<<q.size();
 
 }
