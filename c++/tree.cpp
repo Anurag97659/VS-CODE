@@ -33,7 +33,6 @@ class Node{
         cout << setw(space) << data << endl;
         if (left) left->printTree(space, levelGap);
     }
-
 };
 int main(){
      Node* n1 = new Node(1);

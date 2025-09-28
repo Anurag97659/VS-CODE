@@ -22,5 +22,5 @@ void MoresVotingAlgo(vector<int>&arr){
 int main(){
     vector<int>n={1,2,1,2,1};
     MoresVotingAlgo(n);
-  
+    
 }

@@ -164,7 +164,7 @@ class queue{
         if(a.head==NULL)a.addatstart(data);
         else a.addatend(data);
         cout<<a.tail->data<<" is added in the queue\n";
-    }
+    }   
     void pop(){
         if(a.head!=NULL){
         int b=a.head->data;
@@ -188,20 +188,20 @@ class queue{
 };
 
 int main(){
-    // queue_list b;
-    // b.push(1);    
-    // b.push(2);    
-    // b.push(3);    
-    // b.push(4);    
-    // b.push(5); 
-    // while(!b.isEmpty()){
-    //     b.size();
-    //     b.top();
-    //     b.pop();
-    // }   
-    // b.size();
-    // b.top();
-    // b.pop();
+    queue_list b;
+    b.push(1);    
+    b.push(2);    
+    b.push(3);    
+    b.push(4);    
+    b.push(5); 
+    while(!b.isEmpty()){
+        b.size();
+        b.top();
+        b.pop();
+    }   
+    b.size();
+    b.top();
+    b.pop();
     queue a;
     a.push(1);
     a.push(2);
