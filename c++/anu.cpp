@@ -1,7 +1,12 @@
-# include<iostream>
+#include <iostream>
 using namespace std;
 
 int main(){
-    string a="anu";
-    cout<<a.length();
+    int a =12;
+    int b = a%10;
+    cout<<b<<endl;
+    // now save the tens place digit
+    int c = a/10;
+    cout<<c<<endl;
+    
 }
