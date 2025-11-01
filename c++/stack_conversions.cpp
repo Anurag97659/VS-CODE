@@ -62,16 +62,40 @@ string infix_to_prefix(string a){
 }
   
 string postfix_to_infix(string a){
-    
+    stack<string> s;
+    string output;
+    for(int i=0;i<a.length();i++){
+        char c = a[i];
+        if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')){
+            string c1 = "";
+            c1+=c;
+            s.push(c1);
+        } 
+        else{
+            if(s.size()>=2){
+                string a2 = s.top();
+                s.pop();
+                string a1 = s.top();
+                s.pop();
+                string add = "";
+                add = "(" + a1 + c + a2 + ")";
+                s.push(add);
+            }
+        }
+        output=s.top();
+    }
+    return output; 
 }
 
 
 int main(){
-    string a = "a+b*(c^d-e)^(f+g*h)-i";   
-    string b = "a+b*(c^d-e)^(f+g*h)-i";   
-    string c = "a+(b*c)";
-    cout<< infix_to_prefix(c)<<endl;// +a*bc
-    cout<< infix_to_postfix(c)<<endl;// abc*+
-    cout<< infix_to_postfix(b)<<endl;// abcd^e-fgh*+^*+i-
-    cout<< infix_to_prefix(b)<<endl;// -+a*b^-^cde+f*ghi 
+    // string a = "a+b*(c^d-e)^(f+g*h)-i";   
+    // string b = "a+b*(c^d-e)^(f+g*h)-i";   
+    // string c = "a+(b*c)";
+    // cout<< infix_to_prefix(c)<<endl;// +a*bc
+    // cout<< infix_to_postfix(c)<<endl;// abc*+
+    // cout<< infix_to_postfix(b)<<endl;// abcd^e-fgh*+^*+i-
+    // cout<< infix_to_prefix(b)<<endl;// -+a*b^-^cde+f*ghi 
+    string a1 = "abcd^e-fgh*+^*+i-";
+    cout<<postfix_to_infix(a1);
 }
