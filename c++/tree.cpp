@@ -36,19 +36,22 @@ class Node{
     }
 };
 
-void breathFirstSearch(Node* root){
-    if(root==NULL) return;
+vector<int> breathFirstSearch(Node* root){
+    vector<int>bfs;
+    if(root==NULL) return bfs;
     queue<Node*> q;
     q.push(root);
     while(!q.empty()){
         Node* curr = q.front();
         q.pop();
         cout<<curr->data<<" ";
+        bfs.push_back(curr->data);
         if(curr->left!=NULL) q.push(curr->left);
         if(curr->right!=NULL) q.push(curr->right);
 
-    }
-
+    }cout<<endl;
+    for(int i=0;i<bfs.size();i++){cout<<bfs[i]<<" ";}
+    return bfs;
 }
 void depthFirstSearch(Node* root){
     if(root==NULL) return;
@@ -65,12 +68,12 @@ int main(){
      n1->right->left = new Node(6);
      n1->right->right = new Node(7);
      n1->printTree();
-     cout<<"Height of tree is: ";
+    //  cout<<"Height of tree is: ";
     // n1->height();
     cout<<endl<<"Breath First Search: ";
     breathFirstSearch(n1);
-    cout<<endl<<"Depth First Search: ";
-    depthFirstSearch(n1);
+    // cout<<endl<<"Depth First Search: ";
+    // depthFirstSearch(n1);
     
 
 }

@@ -1,28 +1,55 @@
-#include<iostream>
-#include<algorithm>
-#include<vector>
-#include<string>
+#include <iostream>
+#include <stack>
+#include <vector>
 using namespace std;
-struct student{
-    int roll;
-    string name;
-    string course;
-    int age;   
-};
-int main(){
-    vector<student> v;
-    for(int i=0;i<5;i++){
-        string name,course;
-        int roll,age;
-        roll = rand()%100;
-        name = "Student" + to_string(i+1);
-        course = "Course" + to_string((i%3)+1);
-        age = 18 + rand()%5;
-        student s = {roll, name, course, age};
-        v.push_back(s); 
-    }
-    for(auto i:v){
-        cout<<"Roll: "<<i.roll<<", Name: "<<i.name<<", Course: "<<i.course<<", Age: "<<i.age<<endl;
-    }
 
+int conversion (string temp){
+    int result = 0;
+        for(int i = 0; i < temp.size(); i++){
+            if(temp[i] >= '0' && temp[i] <= '9'){
+                result = result * 10 + (temp[i] - '0');
+            } 
+            else if(temp[i] == '+'){
+                result += (temp[i+1] - '0');
+                i++;
+            } 
+            else if(temp[i] == '-'){
+                result -= (temp[i+1] - '0');
+                i++;
+            } 
+            else if(temp[i] == '*'){
+                result *= (temp[i+1] - '0');
+                i++;
+            } 
+            else if(temp[i] == '/'){
+                result /= (temp[i+1] - '0');
+                i++;
+            }
+        }
+    return result;
+}
+
+int main(){
+    vector<string> tokens ={"2", "3", "+", "4", "*"};
+    stack<string>infix;
+        for(int i = 0; i < tokens.size(); i++){
+            if(tokens[i] != "+" && tokens[i] != "-" && tokens[i] != "/" && tokens[i] != "*"){
+                infix.push(tokens[i]);
+            } 
+            else{
+                string op = tokens[i];
+                string operand2 = infix.top();
+                infix.pop();
+                string operand1 = infix.top();
+                infix.pop();
+                string temp = operand1 + op + operand2;
+                int result = conversion(temp);
+                infix.push(to_string(result));
+            }
+        }
+    cout << infix.top() << endl;
+    cout << conversion(infix.top()) << endl;
+
+        
+        
 }

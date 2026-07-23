@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
+#include <iostream>
 #include <string>
 #include<unordered_map>
 #include<map>
@@ -215,17 +216,26 @@ void Odd_even_list(){
     }
     odd->next=temp;
 }
+void middle_element(){
+    struct node *slow=head;
+    struct node *fast=head;
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    cout<<"middle element is "<<slow->data<<endl;
+} 
 
 int main(){
     insertatbegin(1);
     insertatend(2);
     insertatend(3);
     insertatend(4);
-    insertatend(5);
-    insertatend(6);
-    insertatend(7);
-    //1->2->3->4->5->6->7
+    //1->2->3->4
+    // printList();
+    // Odd_even_list();
     printList();
-    Odd_even_list();
-    printList();
+    middle_element();
+    
+    
 }
