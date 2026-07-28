@@ -25,6 +25,7 @@ int reversort(vector<int> &arr) {
 vector<int> reversort_engineering(int n, int C){
     int minCost = n - 1;
     int maxCost = (n * (n + 1) / 2) - 1;
+    cout << "Min cost: " << minCost << ", Max cost: " << maxCost << endl;
     if (C < minCost || C > maxCost)return {};
 
     vector<int> a(n);
@@ -51,7 +52,7 @@ int main() {
     cout << "\nTotal cost: " << total_cost << endl;
 
     cout << "Reversort Engineering: " << endl;
-    vector<int> result = reversort_engineering(9, 44);
+    vector<int> result = reversort_engineering(13, 44);
     for (int num : result) {
         cout << num << " ";
     }
