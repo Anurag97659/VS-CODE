@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meeting Place Cannot Be Changed — Explained</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#14171c;
+    --asphalt-2:#1c2027;
+    --asphalt-3:#242933;
+    --line-amber:#f4c95d;
+    --line-amber-dim:#8a7238;
+    --signal-teal:#5eead4;
+    --alert-coral:#fb7168;
+    --text-main:#eef1f5;
+    --text-dim:#9aa3b2;
+    --text-dimmer:#6b7280;
+    --card-border:#2c313c;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--asphalt);
+    color:var(--text-main);
+    font-family:'Inter',sans-serif;
+    line-height:1.65;
+    font-size:16px;
+  }
+  h1,h2,h3,.mono-label{font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.03em;}
+  code, .mono, .num{font-family:'JetBrains Mono',monospace;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 28px 100px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(180deg, #0d0f13 0%, var(--asphalt) 100%);
+    padding:64px 28px 40px;
+    border-bottom:1px solid var(--card-border);
+    overflow:hidden;
+  }
+  .hero-inner{max-width:920px; margin:0 auto;}
+  .eyebrow{
+    color:var(--signal-teal);
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--signal-teal);}
+  h1.title{
+    font-size:clamp(34px,5.2vw,54px);
+    font-weight:700;
+    margin:0 0 14px;
+    line-height:1.05;
+    color:#fff;
+  }
+  h1.title span{color:var(--line-amber);}
+  .subtitle{
+    color:var(--text-dim);
+    font-size:17px;
+    max-width:640px;
+    margin:0 0 34px;
+    font-weight:400;
+  }
+  .tag-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:38px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    padding:5px 11px;
+    border:1px solid var(--card-border);
+    border-radius:3px;
+    color:var(--text-dim);
+    background:var(--asphalt-2);
+  }
+
+  /* road illustration */
+  .road-svg{width:100%; height:auto; display:block;}
+  .lane-dash{stroke-dasharray:26 22; animation:dashmove 1.6s linear infinite;}
+  @keyframes dashmove{to{stroke-dashoffset:-96;}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:52px 0; border-bottom:1px solid var(--card-border);}
+  section:last-of-type{border-bottom:none;}
+  .sec-label{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--line-amber);
+    font-size:12px;
+    letter-spacing:0.12em;
+    margin-bottom:10px;
+  }
+  h2{font-size:26px; color:#fff; margin:0 0 18px; font-weight:600;}
+  h3{font-size:17px; color:var(--signal-teal); margin:28px 0 10px; font-weight:500; text-transform:none; letter-spacing:0;}
+  p{color:#cdd3dc; margin:0 0 14px;}
+  ul,ol{color:#cdd3dc; padding-left:22px;}
+  li{margin-bottom:8px;}
+  strong{color:#fff; font-weight:600;}
+  .callout{
+    background:var(--asphalt-2);
+    border:1px solid var(--card-border);
+    border-left:3px solid var(--signal-teal);
+    border-radius:4px;
+    padding:16px 20px;
+    margin:18px 0;
+    color:#d6dbe3;
+    font-size:15px;
+  }
+  .callout.warn{border-left-color:var(--alert-coral);}
+  .callout.warn strong{color:var(--alert-coral);}
+
+  /* constraint chips */
+  .constraints{display:flex; gap:12px; flex-wrap:wrap; margin:18px 0;}
+  .constraint{
+    background:var(--asphalt-3);
+    border:1px solid var(--card-border);
+    border-radius:6px;
+    padding:12px 16px;
+    min-width:150px;
+  }
+  .constraint .k{font-size:11px; color:var(--text-dimmer); text-transform:uppercase; letter-spacing:.08em; font-family:'JetBrains Mono',monospace;}
+  .constraint .v{font-family:'JetBrains Mono',monospace; font-size:15px; color:var(--line-amber); margin-top:4px;}
+
+  /* code block */
+  pre{
+    background:#0d0f13;
+    border:1px solid var(--card-border);
+    border-radius:6px;
+    padding:18px 20px;
+    overflow-x:auto;
+    font-size:13.5px;
+    line-height:1.6;
+    color:#d6dbe3;
+  }
+  pre .c-kw{color:#f4c95d;}
+  pre .c-fn{color:#5eead4;}
+  pre .c-com{color:#6b7280; font-style:italic;}
+  pre .c-str{color:#a6e3a1;}
+  pre .c-num{color:#fb9f68;}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin:14px 0 6px;}
+  th,td{
+    padding:8px 10px;
+    text-align:right;
+    border-bottom:1px solid var(--card-border);
+    font-family:'JetBrains Mono',monospace;
+    color:#cdd3dc;
+  }
+  th{color:var(--text-dimmer); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:.05em;}
+  td:first-child, th:first-child{text-align:left; color:var(--text-dim);}
+  tr.feasible td{color:var(--signal-teal);}
+  tr.infeasible td{color:var(--alert-coral);}
+  .badge{font-size:10.5px; padding:2px 7px; border-radius:10px; font-family:'JetBrains Mono',monospace;}
+  .badge.ok{background:rgba(94,234,212,.12); color:var(--signal-teal);}
+  .badge.no{background:rgba(251,113,104,.12); color:var(--alert-coral);}
+
+  /* interactive explorer */
+  .explorer{
+    background:var(--asphalt-2);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    padding:24px 26px 28px;
+    margin:20px 0;
+  }
+  .explorer-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; flex-wrap:wrap; gap:8px;}
+  .explorer-head h3{margin:0; color:#fff;}
+  .t-readout{font-family:'JetBrains Mono',monospace; color:var(--line-amber); font-size:15px;}
+  .explorer p.hint{font-size:13.5px; color:var(--text-dimmer); margin-bottom:16px;}
+  input[type=range]{
+    width:100%;
+    accent-color: var(--line-amber);
+    margin: 6px 0 20px;
+  }
+  #explorerSvg{width:100%; height:auto; display:block; background:#0d0f13; border-radius:6px; border:1px solid var(--card-border);}
+  .status-line{
+    display:flex; align-items:center; gap:10px;
+    margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:14px;
+  }
+  .status-dot{width:9px; height:9px; border-radius:50%;}
+  .legend{display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; font-size:12.5px; color:var(--text-dim);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend i{width:12px; height:12px; border-radius:2px; display:inline-block;}
+
+  /* worked example diagram cards */
+  .diagram-card{
+    background:var(--asphalt-2);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    padding:20px 22px 22px;
+    margin:18px 0;
+  }
+  .diagram-card svg{width:100%; height:auto; display:block;}
+
+  footer{
+    text-align:center;
+    padding:36px 28px;
+    color:var(--text-dimmer);
+    font-size:13px;
+  }
+
+  a{color:var(--signal-teal);}
+
+  @media (max-width:600px){
+    .hero{padding:48px 18px 30px;}
+    .wrap{padding:0 18px 80px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Codeforces 782B / 780B &nbsp;·&nbsp; NPTEL — Getting Started with Competitive Programming</div>
+    <h1 class="title">The Meeting Place<br>Cannot Be <span>Changed</span></h1>
+    <p class="subtitle">A straight road, a handful of friends, and one question: how fast can they all stand on the exact same spot? The answer hides in a trick that shows up constantly in competitive programming — binary search on the answer itself.</p>
+    <div class="tag-row">
+      <span class="tag">binary search</span>
+      <span class="tag">ternary search</span>
+      <span class="tag">rating ~1600</span>
+      <span class="tag">n ≤ 60,000</span>
+    </div>
+
+    <svg class="road-svg" viewBox="0 0 880 150" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="880" height="150" fill="#0d0f13"/>
+      <rect x="0" y="55" width="880" height="40" fill="#1c2027"/>
+      <line x1="0" y1="75" x2="880" y2="75" stroke="#f4c95d" stroke-width="3" class="lane-dash"/>
+      <!-- mile markers / friends -->
+      <g font-family="JetBrains Mono" font-size="11" fill="#6b7280">
+        <line x1="70" y1="55" x2="70" y2="95" stroke="#2c313c"/>
+        <line x1="230" y1="55" x2="230" y2="95" stroke="#2c313c"/>
+        <line x1="470" y1="55" x2="470" y2="95" stroke="#2c313c"/>
+        <line x1="690" y1="55" x2="690" y2="95" stroke="#2c313c"/>
+        <line x1="810" y1="55" x2="810" y2="95" stroke="#2c313c"/>
+      </g>
+      <!-- friend 1 -->
+      <circle cx="70" cy="75" r="9" fill="#5eead4"/>
+      <text x="70" y="40" text-anchor="middle" fill="#5eead4" font-family="JetBrains Mono" font-size="12">x=1, v=2</text>
+      <!-- friend 2 -->
+      <circle cx="470" cy="75" r="9" fill="#f4c95d"/>
+      <text x="470" y="40" text-anchor="middle" fill="#f4c95d" font-family="JetBrains Mono" font-size="12">x=3, v=1</text>
+      <!-- friend 3 -->
+      <circle cx="810" cy="75" r="9" fill="#fb7168"/>
+      <text x="810" y="40" text-anchor="middle" fill="#fb7168" font-family="JetBrains Mono" font-size="12">x=7, v=1</text>
+      <!-- meeting point -->
+      <circle cx="580" cy="75" r="5" fill="none" stroke="#fff" stroke-width="1.5"/>
+      <text x="580" y="120" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono" font-size="12">meet at x=5, t=2s</text>
+      <line x1="580" y1="80" x2="580" y2="112" stroke="#ffffff" stroke-width="1" stroke-dasharray="3 3"/>
+    </svg>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ PROBLEM STATEMENT ============ -->
+<section>
+  <div class="sec-label">01 — The Problem, In Plain Words</div>
+  <h2>What are we actually being asked?</h2>
+  <p>Picture Bytecity's main road as a single straight number line, running south to north. <strong>n</strong> friends are standing at various points on this line. Each friend <strong>i</strong> is at coordinate <code>x[i]</code>, and can walk north or south at any speed up to their personal maximum <code>v[i]</code> metres per second — they don't have to move at full speed, and they can change direction whenever they like.</p>
+  <p>Everyone wants to end up standing at the <em>same</em> point at the <em>same</em> moment. That meeting point does not need to be one of the friends' starting positions, and it does not need to be a whole number. We just need to find the <strong>smallest possible time</strong> at which a common meeting point exists.</p>
+
+  <div class="constraints">
+    <div class="constraint"><div class="k">Friends (n)</div><div class="v">2 to 60,000</div></div>
+    <div class="constraint"><div class="k">Position x[i]</div><div class="v">1 to 10⁹</div></div>
+    <div class="constraint"><div class="k">Max speed v[i]</div><div class="v">1 to 10⁹</div></div>
+    <div class="constraint"><div class="k">Answer tolerance</div><div class="v">± 10⁻⁶</div></div>
+  </div>
+
+  <div class="callout">
+    Think of it as a rendezvous problem: you get to <em>choose</em> a meeting point and a time, then check whether every friend can physically reach that point by that time without exceeding their speed limit.
+  </div>
+</section>
+
+<!-- ============ CORE IDEA ============ -->
+<section>
+  <div class="sec-label">02 — The Key Insight</div>
+  <h2>Search over time, not over the meeting point</h2>
+  <p>The tempting first instinct is to search for the <em>place</em> everyone meets. That's messy — the optimal point can be any real number among an infinite set of candidates. Instead, flip the question around and search over <em>time</em>, which behaves far more predictably.</p>
+
+  <h3>Ask a yes/no question</h3>
+  <p>Fix a candidate time <code>t</code>. For that fixed <code>t</code>, each friend can reach <em>any</em> point inside a closed interval:</p>
+  <pre><span class="c-com">// friend i can be anywhere in this range after t seconds</span>
+reach(i, t) = [ x[i] - v[i]*t ,  x[i] + v[i]*t ]</pre>
+  <p>All <strong>n</strong> friends can gather at time <code>t</code> if and only if these <strong>n</strong> intervals share at least one common point — i.e. their intersection is non-empty. That's a simple, fast, purely numerical check.</p>
+
+  <h3>Why binary search applies</h3>
+  <p>Here's the property that makes the whole approach work: as <code>t</code> grows, every friend's reachable interval only ever <em>widens</em> (it never shrinks, since speed is fixed and time only increases). Wider intervals are more likely to overlap. That means feasibility is <strong>monotonic</strong>:</p>
+  <ul>
+    <li>If gathering is possible at time <code>t</code>, it is also possible at any time <code>&gt; t</code> — just have everyone stand still for the leftover time.</li>
+    <li>If gathering is impossible at time <code>t</code>, it stays impossible at any time <code>&lt; t</code>.</li>
+  </ul>
+
+  <div class="diagram-card">
+    <svg viewBox="0 0 820 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="820" height="200" fill="#0d0f13" rx="4"/>
+      <text x="20" y="26" fill="#9aa3b2" font-family="Inter" font-size="12.5">feasible(t) — a step function in time</text>
+      <!-- axes -->
+      <line x1="60" y1="160" x2="780" y2="160" stroke="#2c313c" stroke-width="1.5"/>
+      <text x="780" y="182" fill="#6b7280" font-family="JetBrains Mono" font-size="11" text-anchor="end">time t →</text>
+      <!-- false region -->
+      <rect x="60" y="60" width="330" height="20" fill="rgba(251,113,104,.12)"/>
+      <text x="225" y="50" text-anchor="middle" fill="#fb7168" font-family="JetBrains Mono" font-size="12">infeasible</text>
+      <!-- true region -->
+      <rect x="390" y="60" width="390" height="20" fill="rgba(94,234,212,.14)"/>
+      <text x="585" y="50" text-anchor="middle" fill="#5eead4" font-family="JetBrains Mono" font-size="12">feasible</text>
+      <!-- step line -->
+      <path d="M60,120 L390,120 L390,90 L780,90" fill="none" stroke="#f4c95d" stroke-width="2.5"/>
+      <circle cx="390" cy="90" r="4" fill="#f4c95d"/>
+      <line x1="390" y1="160" x2="390" y2="90" stroke="#f4c95d" stroke-width="1" stroke-dasharray="4 4"/>
+      <text x="390" y="176" text-anchor="middle" fill="#f4c95d" font-family="JetBrains Mono" font-size="12">t* = answer</text>
+    </svg>
+  </div>
+  <p>Because the answer switches cleanly from "no" to "yes" exactly once, binary search can zero in on that switching point — the minimum feasible time — in roughly <code>log₂(range / precision)</code> steps.</p>
+</section>
+
+<!-- ============ THE CHECK FUNCTION ============ -->
+<section>
+  <div class="sec-label">03 — The Feasibility Check</div>
+  <h2>Turning "do the intervals overlap?" into two numbers</h2>
+  <p>Checking whether <strong>n</strong> intervals have a common point doesn't require comparing them pairwise. It only takes two values:</p>
+  <ul>
+    <li><strong>maxLow</strong> — the largest of all the interval left-ends: <code>max(x[i] - v[i]*t)</code></li>
+    <li><strong>minHigh</strong> — the smallest of all the interval right-ends: <code>min(x[i] + v[i]*t)</code></li>
+  </ul>
+  <p>The intervals overlap exactly when <code>maxLow ≤ minHigh</code>. If that holds, every point in <code>[maxLow, minHigh]</code> is a valid meeting spot at time <code>t</code>.</p>
+
+  <div class="diagram-card">
+    <svg viewBox="0 0 820 210" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="820" height="210" fill="#0d0f13" rx="4"/>
+      <text x="20" y="24" fill="#9aa3b2" font-family="Inter" font-size="12.5">three intervals at a fixed time t — the overlap (white) is the answer region</text>
+      <!-- number line -->
+      <line x1="40" y1="170" x2="780" y2="170" stroke="#2c313c" stroke-width="1.5"/>
+      <!-- interval bars -->
+      <rect x="80"  y="60"  width="380" height="14" rx="3" fill="#5eead4" opacity="0.55"/>
+      <text x="80" y="52" fill="#5eead4" font-family="JetBrains Mono" font-size="11">friend A</text>
+      <rect x="240" y="90"  width="420" height="14" rx="3" fill="#f4c95d" opacity="0.55"/>
+      <text x="240" y="82" fill="#f4c95d" font-family="JetBrains Mono" font-size="11">friend B</text>
+      <rect x="150" y="120" width="330" height="14" rx="3" fill="#fb7168" opacity="0.55"/>
+      <text x="150" y="112" fill="#fb7168" font-family="JetBrains Mono" font-size="11">friend C</text>
+      <!-- overlap -->
+      <rect x="240" y="145" width="240" height="16" rx="3" fill="#ffffff"/>
+      <text x="360" y="196" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono" font-size="12">[maxLow, minHigh] → overlap = valid meeting points</text>
+      <line x1="240" y1="60" x2="240" y2="161" stroke="#ffffff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+      <line x1="480" y1="60" x2="480" y2="161" stroke="#ffffff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <pre><span class="c-kw">function</span> <span class="c-fn">feasible</span>(t, x[], v[], n):
+    maxLow  = -infinity
+    minHigh = +infinity
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> 0..n-1:
+        maxLow  = max(maxLow,  x[i] - v[i] * t)
+        minHigh = min(minHigh, x[i] + v[i] * t)
+    <span class="c-kw">return</span> maxLow &lt;= minHigh</pre>
+  <p>This check runs in <code>O(n)</code> time, which is what makes the whole binary-search wrapper efficient.</p>
+</section>
+
+<!-- ============ INTERACTIVE EXPLORER ============ -->
+<section>
+  <div class="sec-label">04 — Try It Yourself</div>
+  <h2>Drag the slider, watch the intervals move</h2>
+  <p>This uses the friends from Codeforces sample 1: positions <code>[7, 1, 3]</code>, speeds <code>[1, 2, 1]</code>. Slide <code>t</code> and watch each friend's reachable interval grow — notice the exact instant the three bars first touch at a single point.</p>
+
+  <div class="explorer">
+    <div class="explorer-head">
+      <h3>Live interval intersection</h3>
+      <div class="t-readout">t = <span id="tVal">2.00</span>s</div>
+    </div>
+    <p class="hint">Drag to change t. maxLow / minHigh update live below the diagram.</p>
+    <input type="range" id="tSlider" min="0" max="4" step="0.01" value="2">
+    <svg id="explorerSvg" viewBox="0 0 820 230" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="820" height="230" fill="#0d0f13"/>
+      <line id="axis" x1="40" y1="190" x2="780" y2="190" stroke="#2c313c" stroke-width="1.5"/>
+      <g id="ticks"></g>
+      <rect id="barA" y="60"  height="16" rx="3" fill="#5eead4" opacity="0.55"/>
+      <text id="labA" y="52" fill="#5eead4" font-family="JetBrains Mono" font-size="11">friend 1 (x=7, v=1)</text>
+      <rect id="barB" y="100" height="16" rx="3" fill="#f4c95d" opacity="0.55"/>
+      <text id="labB" y="92" fill="#f4c95d" font-family="JetBrains Mono" font-size="11">friend 2 (x=1, v=2)</text>
+      <rect id="barC" y="140" height="16" rx="3" fill="#fb7168" opacity="0.55"/>
+      <text id="labC" y="132" fill="#fb7168" font-family="JetBrains Mono" font-size="11">friend 3 (x=3, v=1)</text>
+      <rect id="overlap" y="168" height="18" rx="3" fill="#ffffff"/>
+    </svg>
+    <div class="status-line">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText"></span>
+    </div>
+    <div class="legend">
+      <span><i style="background:#5eead4"></i> friend 1 range</span>
+      <span><i style="background:#f4c95d"></i> friend 2 range</span>
+      <span><i style="background:#fb7168"></i> friend 3 range</span>
+      <span><i style="background:#ffffff"></i> overlap region</span>
+    </div>
+  </div>
+  <p style="font-size:14px;color:#9aa3b2;">Try t = 1.75 (no overlap yet), t = 2.00 (they meet at exactly one point, x = 5), and t = 3.00 (a whole range of valid meeting points opens up).</p>
+</section>
+
+<!-- ============ WORKED EXAMPLE 1 ============ -->
+<section>
+  <div class="sec-label">05 — Worked Example 1</div>
+  <h2>n = 3, x = [7, 1, 3], v = [1, 2, 1] → answer 2.000000</h2>
+  <p>Binary search narrows a time window <code>[lo, hi]</code>. Each round, check the midpoint: if feasible, the answer is at or below the midpoint, so pull <code>hi</code> down; otherwise push <code>lo</code> up. Below is an actual trace (starting window <code>[0, 14]</code>, since 14 is twice the largest coordinate — safely above any possible answer):</p>
+
+  <table>
+    <thead><tr><th>iter</th><th>lo</th><th>hi</th><th>mid (t)</th><th>maxLow</th><th>minHigh</th><th>result</th></tr></thead>
+    <tbody>
+      <tr class="feasible"><td>1</td><td>0.0000</td><td>14.0000</td><td>7.0000</td><td>0.0000</td><td>10.0000</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="feasible"><td>2</td><td>0.0000</td><td>7.0000</td><td>3.5000</td><td>3.5000</td><td>6.5000</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="infeasible"><td>3</td><td>0.0000</td><td>3.5000</td><td>1.7500</td><td>5.2500</td><td>4.5000</td><td><span class="badge no">infeasible</span></td></tr>
+      <tr class="feasible"><td>4</td><td>1.7500</td><td>3.5000</td><td>2.6250</td><td>4.3750</td><td>5.6250</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="feasible"><td>5</td><td>1.7500</td><td>2.6250</td><td>2.1875</td><td>4.8125</td><td>5.1875</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="infeasible"><td>6</td><td>1.7500</td><td>2.1875</td><td>1.9688</td><td>5.0312</td><td>4.9375</td><td><span class="badge no">infeasible</span></td></tr>
+      <tr class="feasible"><td>7</td><td>1.9688</td><td>2.1875</td><td>2.0781</td><td>4.9219</td><td>5.0781</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr><td colspan="7" style="text-align:center;color:#6b7280;">… converges the same way …</td></tr>
+      <tr class="feasible"><td>14</td><td>1.9995</td><td>2.0012</td><td>2.0004</td><td>4.9996</td><td>5.0004</td><td><span class="badge ok">feasible</span></td></tr>
+    </tbody>
+  </table>
+  <p>After ~40–50 iterations (or the roughly 14 shown here to illustrate the pattern), <code>lo</code> and <code>hi</code> squeeze onto <code>t ≈ 2.000000</code>, matching the official answer. At that time, friend 1 walks south from 7 to 5, while friends 2 and 3 walk north from 1 and 3 to 5 — everyone lands on <strong>x = 5</strong> at once.</p>
+
+  <div class="diagram-card">
+    <svg viewBox="0 0 820 190" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="820" height="190" fill="#0d0f13" rx="4"/>
+      <text x="20" y="24" fill="#9aa3b2" font-family="Inter" font-size="12.5">at t = 2s, all three ranges touch at exactly x = 5</text>
+      <line x1="40" y1="150" x2="780" y2="150" stroke="#2c313c" stroke-width="1.5"/>
+      <!-- scale: 0 -> x=40, 10 -> x=780, so px = 40 + coord*74 -->
+      <!-- friend1: x=7 v=1 t=2 -> [5,9] -->
+      <rect x="410" y="55" width="296" height="15" rx="3" fill="#5eead4" opacity="0.5"/>
+      <text x="410" y="47" fill="#5eead4" font-family="JetBrains Mono" font-size="11">friend 1: [5, 9]</text>
+      <!-- friend2: x=1 v=2 t=2 -> [-3,5] -->
+      <rect x="-186" y="85" width="596" height="15" rx="3" fill="#f4c95d" opacity="0.5"/>
+      <text x="130" y="77" fill="#f4c95d" font-family="JetBrains Mono" font-size="11">friend 2: [-3, 5]</text>
+      <!-- friend3: x=3 v=1 t=2 -> [1,5] -->
+      <rect x="114" y="115" width="296" height="15" rx="3" fill="#fb7168" opacity="0.5"/>
+      <text x="114" y="107" fill="#fb7168" font-family="JetBrains Mono" font-size="11">friend 3: [1, 5]</text>
+      <line x1="410" y1="55" x2="410" y2="145" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <circle cx="410" cy="150" r="5" fill="#ffffff"/>
+      <text x="410" y="172" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono" font-size="12">x = 5 (single point)</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ WORKED EXAMPLE 2 ============ -->
+<section>
+  <div class="sec-label">06 — Worked Example 2</div>
+  <h2>n = 4, x = [5, 10, 3, 2], v = [2, 3, 2, 4] → answer 1.400000</h2>
+  <p>A second example, this time with four friends, to confirm the pattern holds beyond three points.</p>
+
+  <table>
+    <thead><tr><th>iter</th><th>lo</th><th>hi</th><th>mid (t)</th><th>maxLow</th><th>minHigh</th><th>result</th></tr></thead>
+    <tbody>
+      <tr class="feasible"><td>1</td><td>0.0000</td><td>20.0000</td><td>10.0000</td><td>-15.0000</td><td>23.0000</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="feasible"><td>2</td><td>0.0000</td><td>10.0000</td><td>5.0000</td><td>-5.0000</td><td>13.0000</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="feasible"><td>3</td><td>0.0000</td><td>5.0000</td><td>2.5000</td><td>2.5000</td><td>8.0000</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="infeasible"><td>4</td><td>0.0000</td><td>2.5000</td><td>1.2500</td><td>6.2500</td><td>5.5000</td><td><span class="badge no">infeasible</span></td></tr>
+      <tr class="feasible"><td>5</td><td>1.2500</td><td>2.5000</td><td>1.8750</td><td>4.3750</td><td>6.7500</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="feasible"><td>6</td><td>1.2500</td><td>1.8750</td><td>1.5625</td><td>5.3125</td><td>6.1250</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="feasible"><td>7</td><td>1.2500</td><td>1.5625</td><td>1.4062</td><td>5.7812</td><td>5.8125</td><td><span class="badge ok">feasible</span></td></tr>
+      <tr class="infeasible"><td>8</td><td>1.2500</td><td>1.4062</td><td>1.3281</td><td>6.0156</td><td>5.6562</td><td><span class="badge no">infeasible</span></td></tr>
+      <tr><td colspan="7" style="text-align:center;color:#6b7280;">… converges …</td></tr>
+      <tr class="feasible"><td>16</td><td>1.3995</td><td>1.4001</td><td>1.3998</td><td>5.8005</td><td>5.7997</td><td><span class="badge ok">feasible</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="diagram-card">
+    <svg viewBox="0 0 820 220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="820" height="220" fill="#0d0f13" rx="4"/>
+      <text x="20" y="24" fill="#9aa3b2" font-family="Inter" font-size="12.5">at t ≈ 1.4s, four ranges converge near x = 5.8</text>
+      <line x1="20" y1="180" x2="780" y2="180" stroke="#2c313c" stroke-width="1.5"/>
+      <!-- scale: coord range roughly -4 to 15 -> px = 60 + (coord+4)*40 -->
+      <!-- friend1: x=5,v=2,t=1.4 -> [2.2,7.8] -->
+      <rect x="308" y="55" width="224" height="14" rx="3" fill="#5eead4" opacity="0.5"/>
+      <text x="308" y="47" fill="#5eead4" font-family="JetBrains Mono" font-size="11">friend 1: [2.2, 7.8]</text>
+      <!-- friend2: x=10,v=3,t=1.4 -> [5.8,14.2] -->
+      <rect x="392" y="85" width="336" height="14" rx="3" fill="#f4c95d" opacity="0.5"/>
+      <text x="392" y="77" fill="#f4c95d" font-family="JetBrains Mono" font-size="11">friend 2: [5.8, 14.2]</text>
+      <!-- friend3: x=3,v=2,t=1.4 -> [0.2,5.8] -->
+      <rect x="168" y="115" width="224" height="14" rx="3" fill="#fb7168" opacity="0.5"/>
+      <text x="168" y="107" fill="#fb7168" font-family="JetBrains Mono" font-size="11">friend 3: [0.2, 5.8]</text>
+      <!-- friend4: x=2,v=4,t=1.4 -> [-3.6,7.6] -->
+      <rect x="20" y="145" width="464" height="14" rx="3" fill="#c084fc" opacity="0.5"/>
+      <text x="24" y="137" fill="#c084fc" font-family="JetBrains Mono" font-size="11">friend 4: [-3.6, 7.6]</text>
+      <line x1="392" y1="55" x2="392" y2="175" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <circle cx="392" cy="180" r="5" fill="#ffffff"/>
+      <text x="392" y="202" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono" font-size="12">x ≈ 5.8 (single point)</text>
+    </svg>
+  </div>
+  <p>Notice friend 2 and friend 3 have the tightest ranges — they're the "bottleneck" pair whose interval edges determine both the answer time and the exact meeting point.</p>
+</section>
+
+<!-- ============ CODE ============ -->
+<section>
+  <div class="sec-label">07 — Implementation</div>
+  <h2>Putting it together</h2>
+  <p>The full solution is just the feasibility check from Section 03, wrapped in a fixed number of binary-search iterations. Because the answer only needs 10⁻⁶ precision and coordinates go up to 10⁹, around <strong>100 iterations</strong> is generously more than enough (each iteration halves the window, so even 60 iterations would already crush the range far past the required precision) — but a common, safe habit is to iterate a fixed ~100 times rather than trying to detect convergence.</p>
+
+  <h3>C++</h3>
+  <pre><span class="c-kw">#include</span> <span class="c-str">&lt;bits/stdc++.h&gt;</span>
+<span class="c-kw">using namespace</span> std;
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> n; cin &gt;&gt; n;
+    vector&lt;<span class="c-kw">double</span>&gt; x(n), v(n);
+    <span class="c-kw">for</span> (<span class="c-kw">auto</span> &amp;xi : x) cin &gt;&gt; xi;
+    <span class="c-kw">for</span> (<span class="c-kw">auto</span> &amp;vi : v) cin &gt;&gt; vi;
+
+    <span class="c-kw">double</span> lo = <span class="c-num">0</span>, hi = <span class="c-num">1e9</span>; <span class="c-com">// safe upper bound on the answer</span>
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> iter = <span class="c-num">0</span>; iter &lt; <span class="c-num">100</span>; iter++) {
+        <span class="c-kw">double</span> mid = (lo + hi) / <span class="c-num">2</span>;
+        <span class="c-kw">double</span> maxLow = -<span class="c-num">1e18</span>, minHigh = <span class="c-num">1e18</span>;
+        <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; n; i++) {
+            maxLow  = max(maxLow,  x[i] - v[i] * mid);
+            minHigh = min(minHigh, x[i] + v[i] * mid);
+        }
+        <span class="c-kw">if</span> (maxLow &lt;= minHigh) hi = mid;  <span class="c-com">// feasible -> try smaller t</span>
+        <span class="c-kw">else</span> lo = mid;                   <span class="c-com">// infeasible -> need bigger t</span>
+    }
+    printf(<span class="c-str">"%.9f\n"</span>, (lo + hi) / <span class="c-num">2</span>);
+}</pre>
+
+  <h3>Python</h3>
+  <pre><span class="c-kw">def</span> <span class="c-fn">feasible</span>(t, x, v):
+    max_low  = max(xi - vi * t <span class="c-kw">for</span> xi, vi <span class="c-kw">in</span> zip(x, v))
+    min_high = min(xi + vi * t <span class="c-kw">for</span> xi, vi <span class="c-kw">in</span> zip(x, v))
+    <span class="c-kw">return</span> max_low &lt;= min_high
+
+n = <span class="c-fn">int</span>(input())
+x = <span class="c-fn">list</span>(<span class="c-fn">map</span>(<span class="c-fn">int</span>, input().split()))
+v = <span class="c-fn">list</span>(<span class="c-fn">map</span>(<span class="c-fn">int</span>, input().split()))
+
+lo, hi = <span class="c-num">0.0</span>, <span class="c-num">1e9</span>
+<span class="c-kw">for</span> _ <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">100</span>):
+    mid = (lo + hi) / <span class="c-num">2</span>
+    <span class="c-kw">if</span> <span class="c-fn">feasible</span>(mid, x, v):
+        hi = mid
+    <span class="c-kw">else</span>:
+        lo = mid
+
+<span class="c-fn">print</span>(<span class="c-fn">f</span><span class="c-str">"{(lo + hi) / 2:.9f}"</span>)</pre>
+</section>
+
+<!-- ============ COMPLEXITY ============ -->
+<section>
+  <div class="sec-label">08 — Complexity</div>
+  <h2>Why this comfortably fits the limits</h2>
+  <ul>
+    <li><strong>Per-iteration cost:</strong> the feasibility check scans all <code>n</code> friends once → <code>O(n)</code>.</li>
+    <li><strong>Number of iterations:</strong> fixed, independent of input → <code>O(1)</code> in practice (e.g. 100).</li>
+    <li><strong>Total time:</strong> <code>O(n · iterations)</code>, which for <code>n = 60,000</code> and 100 iterations is about 6 million operations — comfortably inside a 5-second limit.</li>
+    <li><strong>Space:</strong> <code>O(n)</code> to store positions and speeds.</li>
+  </ul>
+  <div class="callout">
+    A common alternative framing you'll see in editorials is <strong>ternary search on the meeting point</strong> instead of binary search on time — since the maximum time-to-reach-a-point function is convex/unimodal in the point's coordinate. Both approaches are valid; binary-search-on-answer is usually considered the cleaner mental model.
+  </div>
+</section>
+
+<!-- ============ PITFALLS ============ -->
+<section>
+  <div class="sec-label">09 — Common Pitfalls</div>
+  <h2>Where people actually lose points</h2>
+
+  <div class="callout warn">
+    <strong>Integer arithmetic.</strong> <code>x[i]</code> and <code>v[i]</code> are integers, but <code>t</code> is not — always compute <code>x[i] - v[i]*t</code> in floating point. Mixing integer and float types (or truncating) silently breaks the check.
+  </div>
+  <div class="callout warn">
+    <strong>Too few iterations.</strong> Coordinates go up to 10⁹, and the required precision is 10⁻⁶. Stopping binary search after only 20–30 iterations may not be tight enough — 100 iterations is a cheap way to guarantee precision regardless of input scale.
+  </div>
+  <div class="callout warn">
+    <strong>Wrong upper bound for hi.</strong> Setting <code>hi</code> too small can clip off the true answer before the search even starts. A generous, easy-to-justify bound like <code>1e9</code> (the max coordinate) is safe here since even a stationary friend anywhere on the line is reachable by others within that time.
+  </div>
+  <div class="callout warn">
+    <strong>Confusing "closest pair" with the real check.</strong> It's tempting to think only the two most distant friends matter. In general you must fold <em>every</em> friend into the <code>maxLow</code> / <code>minHigh</code> computation — a friend in the middle with a very small speed can be the actual bottleneck.
+  </div>
+</section>
+
+<!-- ============ RECAP ============ -->
+<section>
+  <div class="sec-label">10 — Recap</div>
+  <h2>The five-line mental model</h2>
+  <ol>
+    <li>Reframe the question from <em>"where do they meet?"</em> to <em>"can they meet by time t?"</em></li>
+    <li>For a fixed <code>t</code>, each friend's reachable set is an interval <code>[x - vt, x + vt]</code>.</li>
+    <li>All intervals overlap exactly when <code>max(left ends) ≤ min(right ends)</code> — an <code>O(n)</code> check.</li>
+    <li>Feasibility is monotonic in <code>t</code>, so binary search finds the smallest feasible <code>t</code>.</li>
+    <li>Run ~100 iterations of binary search to comfortably clear the 10⁻⁶ precision requirement.</li>
+  </ol>
+</section>
+
+</div>
+
+<footer>
+  Built as a study reference for Codeforces 782B / 780B — "The Meeting Place Cannot Be Changed" (also covered in NPTEL's Getting Started with Competitive Programming, Week 2).
+</footer>
+
+<script>
+(function(){
+  const data = { x:[7,1,3], v:[1,2,1], colors:['#5eead4','#f4c95d','#fb7168'] };
+  const slider = document.getElementById('tSlider');
+  const tVal = document.getElementById('tVal');
+  const dot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+
+  // plot area: x from -6 to 12 mapped to px 40..780
+  const pxMin = 40, pxMax = 780, coordMin = -6, coordMax = 12;
+  function toPx(c){ return pxMin + (c - coordMin) / (coordMax - coordMin) * (pxMax - pxMin); }
+
+  const bars = [document.getElementById('barA'), document.getElementById('barB'), document.getElementById('barC')];
+  const labs = [document.getElementById('labA'), document.getElementById('labB'), document.getElementById('labC')];
+  const names = ['friend 1 (x=7, v=1)', 'friend 2 (x=1, v=2)', 'friend 3 (x=3, v=1)'];
+  const overlapRect = document.getElementById('overlap');
+  const ticksG = document.getElementById('ticks');
+
+  // draw axis ticks once
+  for(let c = -6; c <= 12; c += 2){
+    const px = toPx(c);
+    const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1', px); line.setAttribute('x2', px);
+    line.setAttribute('y1', 186); line.setAttribute('y2', 194);
+    line.setAttribute('stroke', '#2c313c');
+    ticksG.appendChild(line);
+    const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+    txt.setAttribute('x', px); txt.setAttribute('y', 207);
+    txt.setAttribute('fill', '#6b7280'); txt.setAttribute('font-family','JetBrains Mono');
+    txt.setAttribute('font-size', '10'); txt.setAttribute('text-anchor','middle');
+    txt.textContent = c;
+    ticksG.appendChild(txt);
+  }
+
+  function render(){
+    const t = parseFloat(slider.value);
+    tVal.textContent = t.toFixed(2);
+    let maxLow = -Infinity, minHigh = Infinity;
+    for(let i=0;i<3;i++){
+      const lo = data.x[i] - data.v[i]*t;
+      const hi = data.x[i] + data.v[i]*t;
+      maxLow = Math.max(maxLow, lo);
+      minHigh = Math.min(minHigh, hi);
+      const pxLo = toPx(lo), pxHi = toPx(hi);
+      bars[i].setAttribute('x', pxLo);
+      bars[i].setAttribute('width', Math.max(2, pxHi - pxLo));
+      labs[i].setAttribute('x', pxLo);
+      labs[i].textContent = names[i] + `  →  [${lo.toFixed(2)}, ${hi.toFixed(2)}]`;
+    }
+    if(maxLow <= minHigh){
+      const pxLo = toPx(maxLow), pxHi = toPx(minHigh);
+      overlapRect.setAttribute('x', pxLo);
+      overlapRect.setAttribute('width', Math.max(2, pxHi - pxLo));
+      overlapRect.setAttribute('opacity', '1');
+      dot.style.background = '#5eead4';
+      statusText.innerHTML = `<span style="color:#5eead4">feasible</span> — maxLow = ${maxLow.toFixed(3)}, minHigh = ${minHigh.toFixed(3)}, meeting range width = ${(minHigh-maxLow).toFixed(3)}`;
+      statusText.style.color = '#cdd3dc';
+    } else {
+      overlapRect.setAttribute('width', 0);
+      dot.style.background = '#fb7168';
+      statusText.innerHTML = `<span style="color:#fb7168">infeasible</span> — maxLow = ${maxLow.toFixed(3)} > minHigh = ${minHigh.toFixed(3)}, gap = ${(maxLow-minHigh).toFixed(3)}`;
+    }
+  }
+  slider.addEventListener('input', render);
+  render();
+})();
+</script>
+
+</body>
+</html>
